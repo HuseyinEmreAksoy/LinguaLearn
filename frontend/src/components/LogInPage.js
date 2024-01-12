@@ -7,6 +7,7 @@ import { useState } from 'react';
 function LogInPage() {
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
+    const [isLoggedIn, setIsLoggedIn]  = useState(false);
 
     const handleUserName = (event) => {
         setUserName(event.target.value);
@@ -23,7 +24,7 @@ function LogInPage() {
         paddingTop: '5%'
     };
 
-    return(
+    const logInPage = (
         <div style={{
             position: 'absolute', left: '50%', top: '40%',
             transform: 'translate(-50%, -50%)'
@@ -38,14 +39,30 @@ function LogInPage() {
                 <TextField value={password} onChange={handlePassword} required label= "Password" type="password"/>
             </div>
             <div style={style}>
-                <Button variant='contained' onClick={signIn}>Sign In</Button>
+                <Button variant='contained' onClick={logIn}>Sign In</Button>
             </div>
         </div>
     );
 
-    function signIn() {
+    if(!isLoggedIn) {
+        return(logInPage);
+    }
+    // TO-DO: Create new home page component and return it in here!
+    else {
+        return(
+            <h1 style={{
+                position: 'absolute', left: '50%', top: '40%',
+                transform: 'translate(-50%, -50%)'
+            }}>
+                Welcome PAGE!
+            </h1>
+        );
+    }
+
+    function logIn() {
         console.log(userName);
         console.log(password);
+        setIsLoggedIn(true);
     }
 }
 
