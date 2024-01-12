@@ -16,25 +16,31 @@ function LogInPage() {
         setPassword(event.target.value);
     };
 
+    const style = {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingTop: '5%'
+    };
+
     return(
-        <Box
-            sx={{
-            '& .MuiTextField-root': { m: 1, width: '25ch' },
-            }}
-            autoComplete="off"
-        >
-            <div>
-                <div>
-                    <TextField value={userName} onChange={handleUserName} required label="User Name"/>
-                </div>
-                <div>
-                    <TextField value={password} onChange={handlePassword} required label= "Password" type="password"/>
-                </div>
-                <div>
-                    <Button variant='contained' onClick={signIn}>Sign In</Button>
-                </div>
+        <div style={{
+            position: 'absolute', left: '50%', top: '40%',
+            transform: 'translate(-50%, -50%)'
+        }}>
+            <div style={style}>
+                <h1>LinguaLearn</h1>
             </div>
-        </Box>
+            <div style={style}>
+                <TextField value={userName} onChange={handleUserName} required label="User Name"/>
+            </div>
+            <div style={style}>
+                <TextField value={password} onChange={handlePassword} required label= "Password" type="password"/>
+            </div>
+            <div style={style}>
+                <Button variant='contained' onClick={signIn}>Sign In</Button>
+            </div>
+        </div>
     );
 
     function signIn() {
