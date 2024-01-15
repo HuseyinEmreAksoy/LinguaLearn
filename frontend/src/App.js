@@ -1,10 +1,18 @@
 import DraggableButton from './components/DraggableButton';
 import LogInPage from './components/LogInPage';
+import SpeechToText from './Pages/SpeechToText';
+
 import useScreenSize from './hooks/useScreenSize';
+import {
+	Routes,
+	Route,
+  } from 'react-router-dom';
+  import {
+	HOME_PAGE_PATH, READ_PAGE_PATH, LS_PAGE_PATH, SpeechToText_PAGE_PATH
+  } from './constants/routePaths';
 
 function App() {
-	const screenSize = useScreenSize();
-	document.body.style.overflow = "hidden"
+
 
 	// return (
 	// 	<div className="App" style={{width: screenSize.width, height: screenSize.height}}>
@@ -12,9 +20,11 @@ function App() {
 	//  </div>
 	// );
 	return(
-		<div className="App" style={{width: screenSize.width, height: screenSize.height}}>
-	    	<LogInPage></LogInPage>
-	   </div>
+		<Routes>
+			<Route path={HOME_PAGE_PATH} element={<LogInPage />} />
+			<Route path={SpeechToText_PAGE_PATH} element={<SpeechToText />} />
+
+		</Routes>
 	);
 }
 
