@@ -33,27 +33,30 @@ function LogInPage() {
     };
 
     return(
-        <div style={{
-            position: 'absolute', left: '50%', top: '40%',
-            transform: 'translate(-50%, -50%)'
-        }}>
-            <div style={style}>
-                <h1>LinguaLearn</h1>
-            </div>
-            <div style={style}>
-                <TextField value={userName} onChange={handleUserName} required label="User Name"/>
-            </div>
-            <div style={style}>
-                <TextField value={password} onChange={handlePassword} required label= "Password" type="password"/>
-            </div>
-            <div style={style}>
-                <Button variant='contained' onClick={logIn}>Log In</Button>
-            </div>
-            <div style={style}>
-                <Button variant='contained' onClick={goToSignUpPage}>Sign Up</Button>   
+        <>
+            <div style={{
+                position: 'absolute', left: '50%', top: '40%',
+                transform: 'translate(-50%, -50%)'
+            }}>
+                <div style={style}>
+                    <h1 class="text-5xl">LinguaLearn</h1>
+                </div>
+                <div style={style}>
+                    <TextField value={userName} onChange={handleUserName} required label="User Name"/>
+                </div>
+                <div style={style}>
+                    <TextField value={password} onChange={handlePassword} required label= "Password" type="password"/>
+                </div>
+                <p class="text-sm">Forget your password?</p>
+                <div style={style}>
+                    <Button variant='contained' onClick={logIn}>Log In</Button>
+                </div>
+                <div style={style}>
+                    <Button variant='contained' onClick={goToSignUpPage}>Sign Up</Button>   
+                </div>
             </div>
             <DraggableButton/>
-        </div>
+        </>
     );
 
 
