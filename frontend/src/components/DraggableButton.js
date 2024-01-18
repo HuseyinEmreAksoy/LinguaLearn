@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Draggable from 'react-draggable';
 import IconButton from '@mui/material/IconButton';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
@@ -9,62 +9,77 @@ function DraggableButton({screenSize}) {
     const defaultPosition = {x:0, y:0};
     const [position, setPosition] = useState(defaultPosition);
     const [isOpen, setIsOpen] = useState(false);
+    const [listPosition, setListPosition] = useState(defaultPosition);
 
-    const isPositionInRange = (x, y) => {
-        let position = buttonRef.current.getBoundingClientRect();
-        let currentX = position.x, currentY = position.y;
-        return (x < currentX + buttonRef.current.offsetWidth && x >= currentX &&
-             y < currentY + buttonRef.current.offsetHeight && y >= currentY);
+    const getPosition = () => {
+        let specs = buttonRef.current.getBoundingClientRect();
+        return({x:specs.x, y:specs.y});
     }
 
-    const handleClick = (event) => {
-        if(isPositionInRange(event.clientX, event.clientY)) {
-            console.log("opened");
+    const isPositionInRange = () => {
+        let currentPosition = getPosition();
+        return (position.x < currentPosition.x + buttonRef.current.offsetWidth && position.x >= currentPosition.x &&
+            position.y < currentPosition.y + buttonRef.current.offsetHeight && position.y >= currentPosition.y);
+    }
+
+    const handleClick = () => {
+        if(isPositionInRange()) {
             setIsOpen(!isOpen);
+            setListPosition({x:buttonRef.current.getBoundingClientRect().x + buttonRef.current.offsetWidth, y:buttonRef.current.getBoundingClientRect().y + buttonRef.current.offsetHeight/2});
         }
-        setPosition({x:event.clientX, y:event.clientY});
+        setPosition(getPosition());
+    }
+
+    const handleStart = () => {
+        setPosition(getPosition());
+    }
+
+    const handleDrag = () => {
+        if(isOpen) {
+           setListPosition({x:buttonRef.current.getBoundingClientRect().x + buttonRef.current.offsetWidth, y:buttonRef.current.getBoundingClientRect().y + buttonRef.current.offsetHeight/2});
+        }
     }
 
     const mainButton = (
-        <IconButton ref={buttonRef} color="secondary" onClick={handleClick}>
-            <AddCircleIcon fontSize="large"></AddCircleIcon>
-        </IconButton>
+        <Draggable bounds='parent' defaultPosition={position} onDrag={handleDrag} onStart={handleStart}>
+            <IconButton ref={buttonRef} color="secondary" onClick={handleClick}>
+                <AddCircleIcon fontSize="large"></AddCircleIcon>
+            </IconButton>
+        </Draggable>
     );
 
     if(isOpen) {
         return(
-            <Draggable bounds='parent' defaultPosition={position}>
-                <div>
-                    {mainButton}
-                    <List class="w-32">
-                        <ListItem class="bg-red-400">
-                            <ListItemButton>Konuşma</ListItemButton>
-                        </ListItem>
-                        <ListItem class="bg-orange-400">
-                            <ListItemButton>Okuma</ListItemButton>
-                        </ListItem>
-                        <ListItem class="bg-yellow-400">
-                            <ListItemButton>Yazma</ListItemButton>
-                        </ListItem>
-                        <ListItem class="bg-lime-400">
-                            <ListItemButton>Kelime Bilgisi</ListItemButton>
-                        </ListItem>
-                        <ListItem class="bg-cyan-400">
-                            <ListItemButton>Dil Bilgisi</ListItemButton>
-                        </ListItem>
-                        <ListItem class="bg-purple-400">
-                            <ListItemButton>Dinleme</ListItemButton>
-                        </ListItem>
-                    </List>
-                </div>
-            </Draggable>
+            <>
+                {mainButton}
+                <List class="w-32" style={{position:"absolute", left:listPosition.x, top:listPosition.y}}>
+                    <ListItem class="bg-red-400 rounded-r-full">
+                        <ListItemButton><p class="text-white">Konuşma</p></ListItemButton>
+                    </ListItem>
+                    <ListItem class="bg-orange-400 rounded-r-full">
+                        <ListItemButton><p class="text-white">Okuma</p></ListItemButton>
+                    </ListItem>
+                    <ListItem class="bg-yellow-400 rounded-r-full">
+                        <ListItemButton><p class="text-white">Yazma</p></ListItemButton>
+                    </ListItem>
+                    <ListItem class="bg-lime-400 rounded-r-full">
+                        <ListItemButton><p class="text-white">Kelime Bilgisi</p></ListItemButton>
+                    </ListItem>
+                    <ListItem class="bg-cyan-400 rounded-r-full">
+                        <ListItemButton><p class="text-white">Dil Bilgisi</p></ListItemButton>
+                    </ListItem>
+                    <ListItem class="bg-purple-400 rounded-r-full">
+                        <ListItemButton><p class="text-white">Dinleme</p></ListItemButton>
+                    </ListItem>
+                </List>
+            </>
         );
     }
     else {
         return(
-            <Draggable bounds='parent' defaultPosition={position}>
+            <>
                 {mainButton}
-            </Draggable>
+            </>
         );
     }
 }
