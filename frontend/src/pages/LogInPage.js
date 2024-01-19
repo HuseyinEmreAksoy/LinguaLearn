@@ -1,9 +1,8 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
+import { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
-import { useState } from 'react';
-import SignUpPage from './SignUpPage';  
+import Link from '@mui/material/Link';
 import { useNavigate } from "react-router-dom";
 import DraggableButton from '../components/DraggableButton';
 import useScreenSize from '../hooks/useScreenSize';
@@ -16,16 +15,23 @@ function LogInPage() {
     const navigate = useNavigate();
     const screenSize = useScreenSize();
     
-    const [userName, setUserName] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [isLoggedIn, setIsLoggedIn]  = useState(false);
+    const [isEmailErrorActive, setIsEmailErrorActive] = useState(false);
+    const [isPasswordErrorActive, setIsPasswordErrorActive] = useState(false);
 
-    const handleUserName = (event) => {
-        setUserName(event.target.value);
+    const handleEmail = (event) => {
+        setEmail(event.target.value);
+        if(email == "" && isEmailErrorActive){
+            setIsEmailErrorActive(false);
+        }
     };
 
     const handlePassword = (event) => {
-        setPassword(event.target.value);
+        setPassword(event.target.value)
+        if(password == "" && isPasswordErrorActive) {
+            setIsPasswordErrorActive(false);
+        }
     };
 
     const style = {
@@ -41,21 +47,30 @@ function LogInPage() {
                 position: 'absolute', left: '50%', top: '40%',
                 transform: 'translate(-50%, -50%)'
             }}>
-                <div style={style}>
+                <div style={{paddingBottom: '5%'}}>
                     <h1 class="text-5xl">LinguaLearn</h1>
                 </div>
                 <div style={style}>
-                    <TextField value={userName} onChange={handleUserName} required label="User Name"/>
+                    {!isEmailErrorActive ? 
+                        <TextField value={email} onChange={handleEmail} required label="E-Mail"/>
+                        :
+                        <TextField value={email} onChange={handleEmail} error helperText="No Such E-Mail Found!" required label="E-Mail"/>
+                    }
                 </div>
                 <div style={style}>
-                    <TextField value={password} onChange={handlePassword} required label= "Password" type="password"/>
+                    {!isPasswordErrorActive ?
+                        <TextField value={password} onChange={handlePassword} required label= "Password" type="password"/>   
+                        :
+                        <TextField value={password} onChange={handlePassword} error helperText="Invalid Password!" required label= "Password" type="password"/> 
+                    }
                 </div>
-                <p class="text-sm">Forget your password?</p>
+                {/* <Link onClick={() => {console.log("clicked");}} underline="hover" variant='body2'>Forgot Your Password?</Link> */}
                 <div style={style}>
                     <Button variant='contained' onClick={logIn}>Log In</Button>
                 </div>
-                <div style={style}>
-                    <Button variant='contained' onClick={goToSignUpPage}>Sign Up</Button>   
+                <div style={{display:"inline-flex", paddingTop:"3%"}}>
+                    <p style={{paddingRight:"10px"}}>Need an account?</p>
+                    <Link>SING UP!</Link>
                 </div>
                 <div style={style}>
                     <Button variant='contained' onClick={() => navigate(SpeechToText_PAGE_PATH, { state: {} })}>Konuşallım mı brooooo</Button>   
@@ -67,13 +82,10 @@ function LogInPage() {
 
 
     function logIn() {
-        console.log(userName);
+        console.log(email);
         console.log(password);
-        setIsLoggedIn(true);
-    }
-
-    function goToSignUpPage() {
-        navigate('/SignUp');
+        setPassword("");
+        setIsEmailErrorActive(true);
     }
 }
 
