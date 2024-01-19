@@ -48,7 +48,7 @@ function LogInPage() {
                 position: 'absolute', left: '50%', top: '40%',
                 transform: 'translate(-50%, -50%)'
             }}>
-                <div style={{paddingBottom: '5%'}}>
+                <div style={style}>
                     <h1 class="text-5xl">LinguaLearn</h1>
                 </div>
                 <div style={style}>
