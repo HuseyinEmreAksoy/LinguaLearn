@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import DraggableButton from '../components/DraggableButton';
 import useScreenSize from '../hooks/useScreenSize';
 import {
+    Grammar_PAGE_PATH,
 	LS_PAGE_PATH, READ_PAGE_PATH, SignUp_PAGE_PATH, SpeechToText_PAGE_PATH,
   } from '../constants/routePaths';
 import SignUpPage from './SignUpPage';
@@ -75,6 +76,9 @@ function LogInPage() {
                 </div>
                 <div style={style}>
                     <Button variant='contained' onClick={() => navigate(SpeechToText_PAGE_PATH, { state: {} })}>Konuşallım mı brooooo</Button>   
+                </div>
+                <div style={style}>
+                    <Button variant='contained' onClick={() => navigate(Grammar_PAGE_PATH, { state: {} })}>Grammar Page</Button>   
                 </div>
             </div>
             <DraggableButton/>
