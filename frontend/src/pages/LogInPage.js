@@ -10,6 +10,8 @@ import * as routes from '../constants/routePaths';
 import SignUpPage from './SignUpPage';
 import FullPage from '../components/Helper/FullPage';
 
+import axios from 'axios';
+
 function LogInPage() {         
     
     const navigate = useNavigate();
@@ -17,6 +19,7 @@ function LogInPage() {
     
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [passwordValid, setPasswordValid] = useState('');
     const [isEmailErrorActive, setIsEmailErrorActive] = useState(false);
     const [isPasswordErrorActive, setIsPasswordErrorActive] = useState(false);
 
@@ -33,6 +36,20 @@ function LogInPage() {
             setIsPasswordErrorActive(false);
         }
     };
+
+    const getUserByEmail = async (email) => {
+        try {
+          const response = await axios.get(`http://localhost:8080/api/v1/user/findByEmail?userEmail=${email}`);
+          setPasswordValid(response.data?.userPassword);
+          setIsEmailErrorActive(false);
+
+          console.log(response.data);
+          return response.data;
+        } catch (error) {
+            setIsEmailErrorActive(true);
+          console.error('Error while fetching user by email:', error);
+        }
+      };
 
     const style = {
         display: 'flex',
@@ -81,8 +98,15 @@ function LogInPage() {
     function logIn() {
         console.log(email);
         console.log(password);
-        setPassword("");
-        setIsEmailErrorActive(true);
+        getUserByEmail(email)
+
+        if(passwordValid === password) {
+            setIsPasswordErrorActive(false);
+        }else{
+            setPassword("");
+            setIsPasswordErrorActive(true);
+        }
+
     }
 }
 
