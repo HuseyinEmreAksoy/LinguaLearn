@@ -2,26 +2,26 @@ import Wrapper from "./Helper/Wrapper";
 
 function Message(props) {
     const text = props.text;
-    const divClass = "rounded-lg bg-thistle m-2";
-    const pElement = <p class="text-prussian_blue m-1 object-contain">{text}</p>;
+    const divClass = "rounded-lg bg-thistle m-2 clear-both";
+    const pElement = <p class="text-prussian_blue m-3">{text}</p>;
 
     if(props.align === "right") {
         return(
-            <div class={"col-start-3 col-span-4 " + divClass}>
+            <div style={{"max-width":"60%"}} class={"float-right " + divClass}>
                 {pElement}
             </div>    
         );
     }
     else if(props.align === "left") {
         return(
-            <div class={"col-span-4 " + divClass}>
+            <div style={{"max-width":"60%"}} class={"float-left " + divClass}>
                 {pElement}
             </div>
         );
     }
     else if(props.align === "center") {
         return(
-            <div class={"col-span-6 " + divClass}>
+            <div class={"flex justify-center items-center " + divClass}>
                 {pElement}
             </div>
         );
