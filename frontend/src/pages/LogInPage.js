@@ -11,6 +11,7 @@ import {
 	LS_PAGE_PATH, READ_PAGE_PATH, SignUp_PAGE_PATH, SpeechToText_PAGE_PATH,
   } from '../constants/routePaths';
 import SignUpPage from './SignUpPage';
+import FullPage from '../components/Helper/FullPage';
 
 function LogInPage() {         
     
@@ -44,7 +45,7 @@ function LogInPage() {
     };
 
     return(
-        <>
+        <FullPage>
             <div style={{
                 position: 'absolute', left: '50%', top: '40%',
                 transform: 'translate(-50%, -50%)'
@@ -82,7 +83,7 @@ function LogInPage() {
                 </div>
             </div>
             <DraggableButton/>
-        </>
+        </FullPage>
     );
 
 

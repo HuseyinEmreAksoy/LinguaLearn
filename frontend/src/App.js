@@ -7,11 +7,10 @@ import NoPage from './pages/NoPage';
 import SpeechToText from './pages/SpeechToText';
 import * as routePaths from './constants/routePaths';
 function App() {
-	const screenSize = useScreenSize();
 	document.body.style.overflow = "clip"
 	
 	return(
-		<div className="App" style={{width: screenSize.width, height: screenSize.height}}>
+		<div className="App">
 				<Routes>
 					<Route index element={ <LogInPage/>}></Route>
 					<Route path={routePaths.SignUp_PAGE_PATH} element={ <SignUpPage/>}></Route>

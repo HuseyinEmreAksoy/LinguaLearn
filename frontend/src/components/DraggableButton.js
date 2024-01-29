@@ -3,6 +3,7 @@ import Draggable from 'react-draggable';
 import IconButton from '@mui/material/IconButton';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { Button, List, ListItem, ListItemButton } from "@mui/material";
+import Wrapper from "./Helper/Wrapper";
 
 function DraggableButton({screenSize}) {
     const buttonRef = useRef();
@@ -50,7 +51,7 @@ function DraggableButton({screenSize}) {
 
     if(isOpen) {
         return(
-            <>
+            <Wrapper>
                 {mainButton}
                 <List class="w-32" style={{position:"absolute", left:listPosition.x, top:listPosition.y}}>
                     <ListItem class="bg-red-400 rounded-r-full">
@@ -72,14 +73,14 @@ function DraggableButton({screenSize}) {
                         <ListItemButton><p class="text-white">Dinleme</p></ListItemButton>
                     </ListItem>
                 </List>
-            </>
+            </Wrapper>
         );
     }
     else {
         return(
-            <>
+            <Wrapper>
                 {mainButton}
-            </>
+            </Wrapper>
         );
     }
 }
