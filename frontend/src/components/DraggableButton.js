@@ -46,7 +46,7 @@ function DraggableButton({screenSize}) {
     }
 
     const mainButton = (
-        <Draggable bounds='parent' defaultPosition={position} onDrag={handleDrag} onStart={handleStart}>
+        <Draggable class="z-40" bounds='parent' defaultPosition={position} onDrag={handleDrag} onStart={handleStart}>
             <IconButton ref={buttonRef} color="secondary" onClick={handleClick}>
                 <AddCircleIcon fontSize="large"></AddCircleIcon>
             </IconButton>
@@ -57,7 +57,7 @@ function DraggableButton({screenSize}) {
         return(
             <Wrapper>
                 {mainButton}
-                <List class="w-32" style={{position:"absolute", left:listPosition.x, top:listPosition.y}}>
+                <List class="w-32 z-10" style={{position:"absolute", left:listPosition.x, top:listPosition.y}}>
                     <ListItem class="bg-red-400 rounded-r-full" onClick={() => {navigate(routes.SPEAKING_PAGE_PATH);}}>
                         <ListItemButton><p class="text-white">Konuşma</p></ListItemButton>
                     </ListItem>
