@@ -69,25 +69,24 @@ function LogInPage() {
                 </div>
                 <div style={style}>
                     {!isEmailErrorActive ? 
-                        <TextField value={email} onChange={handleEmail} required label="E-Mail"/>
+                        <TextField value={email} onChange={handleEmail} required label="E-Posta"/>
                         :
-                        <TextField value={email} onChange={handleEmail} error helperText="No Such E-Mail Found!" required label="E-Mail"/>
+                        <TextField value={email} onChange={handleEmail} error helperText="E-Posta Bulunamadı!" required label="E-Posta"/>
                     }
                 </div>
                 <div style={style}>
                     {!isPasswordErrorActive ?
-                        <TextField value={password} onChange={handlePassword} required label= "Password" type="password"/>   
+                        <TextField value={password} onChange={handlePassword} required label= "Parola" type="password"/>   
                         :
-                        <TextField value={password} onChange={handlePassword} error helperText="Invalid Password!" required label= "Password" type="password"/> 
+                        <TextField value={password} onChange={handlePassword} error helperText="Geçersiz Parola!" required label= "Parola" type="password"/> 
                     }
                 </div>
-                {/* <Link onClick={() => {console.log("clicked");}} underline="hover" variant='body2'>Forgot Your Password?</Link> */}
                 <div style={style}>
-                    <Button variant='contained' onClick={logIn}>Log In</Button>
+                    <Button variant='contained' onClick={logIn}>Oturum Aç</Button>
                 </div>
                 <div style={{display:"inline-flex", paddingTop:"3%"}}>
-                    <p style={{paddingRight:"10px"}}>Need an account?</p>
-                    <Link onClick={() => {navigate(routes.SignUp_PAGE_PATH)}}>SING UP!</Link>
+                    <p style={{paddingRight:"10px"}}>Hesabın yok mu?</p>
+                    <Link onClick={() => {navigate(routes.SignUp_PAGE_PATH)}}>Kaydol!</Link>
                 </div>
             </div>
             <DraggableButton/>

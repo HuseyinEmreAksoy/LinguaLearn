@@ -51,7 +51,7 @@ function SignUpPage() {
             transform: 'translate(-50%, -50%)', padding:'3%'
         }}>
             <div style={style}>
-                <h1 class="text-3xl">Kaydolma Sayfası</h1>
+                <h1 class="text-3xl">Kaydolun ve Öğrenmeye Başlayın!</h1>
             </div>
             <div class="h-56 grid grid-cols-3 gap-4 content-start">
                 <div>
@@ -61,13 +61,13 @@ function SignUpPage() {
                     <TextField value={surname} onChange={(event) => {setSurname(event.target.value)}} required label="Soyisim"></TextField>
                 </div>
                 <div>
-                    <TextField value={email} onChange={(event) => {setEmail(event.target.value)}} required label="E-Mail"></TextField>
+                    <TextField value={email} onChange={(event) => {setEmail(event.target.value)}} required label="E-Posta"></TextField>
                 </div>
                 <div>
-                    <TextField value={password} onChange={(event) => {setPassword(event.target.value)}} required label= "Şifre" type="password"/> 
+                    <TextField value={password} onChange={(event) => {setPassword(event.target.value)}} required label= "Parola" type="password"/> 
                 </div>
                 <div>
-                    <TextField value={passwordAgain} onChange={(event) => {setPasswordAgain(event.target.value)}} required label= "Şifreyi Yeniden Girin" type="password"/> 
+                    <TextField value={passwordAgain} onChange={(event) => {setPasswordAgain(event.target.value)}} required label= "Parolayı Yeniden Girin" type="password"/> 
                 </div>
                 <FormControl>
                     <InputLabel id="demo-simple-select-label">Ana Dil</InputLabel>
@@ -78,11 +78,11 @@ function SignUpPage() {
                     label="Language"
                     onChange={(event) => {setLanguage(event.target.value)}}
                     >
-                        <MenuItem value={"Turkish"}>Turkish</MenuItem>
-                        <MenuItem value={"English"}>English</MenuItem>
-                        <MenuItem value={"German"}>German</MenuItem>
-                        <MenuItem value={"French"}>French</MenuItem>
-                        <MenuItem value={"Spanish"}>Spanish</MenuItem>
+                        <MenuItem value={"Turkish"}>Türkçe</MenuItem>
+                        <MenuItem value={"English"}>İngilizce</MenuItem>
+                        <MenuItem value={"German"}>Almanca</MenuItem>
+                        <MenuItem value={"French"}>Fransızca</MenuItem>
+                        <MenuItem value={"Spanish"}>İspanyolca</MenuItem>
                     </Select>
                 </FormControl>
             </div>

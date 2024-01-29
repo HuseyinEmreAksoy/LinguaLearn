@@ -58,7 +58,7 @@ function DraggableButton({screenSize}) {
             <Wrapper>
                 {mainButton}
                 <List class="w-32" style={{position:"absolute", left:listPosition.x, top:listPosition.y}}>
-                    <ListItem class="bg-red-400 rounded-r-full">
+                    <ListItem class="bg-red-400 rounded-r-full" onClick={() => {navigate(routes.SPEAKING_PAGE_PATH);}}>
                         <ListItemButton><p class="text-white">Konuşma</p></ListItemButton>
                     </ListItem>
                     <ListItem class="bg-orange-400 rounded-r-full">
