@@ -6,10 +6,9 @@ import Link from '@mui/material/Link';
 import { useNavigate } from "react-router-dom";
 import DraggableButton from '../components/DraggableButton';
 import useScreenSize from '../hooks/useScreenSize';
-import {
-	LS_PAGE_PATH, READ_PAGE_PATH, SignUp_PAGE_PATH, SpeechToText_PAGE_PATH,
-  } from '../constants/routePaths';
+import * as routes from '../constants/routePaths';
 import SignUpPage from './SignUpPage';
+import FullPage from '../components/Helper/FullPage';
 
 function LogInPage() {         
     
@@ -43,7 +42,7 @@ function LogInPage() {
     };
 
     return(
-        <>
+        <FullPage>
             <div style={{
                 position: 'absolute', left: '50%', top: '40%',
                 transform: 'translate(-50%, -50%)'
@@ -71,14 +70,11 @@ function LogInPage() {
                 </div>
                 <div style={{display:"inline-flex", paddingTop:"3%"}}>
                     <p style={{paddingRight:"10px"}}>Need an account?</p>
-                    <Link onClick={() => {navigate(SignUp_PAGE_PATH)}}>SING UP!</Link>
-                </div>
-                <div style={style}>
-                    <Button variant='contained' onClick={() => navigate(SpeechToText_PAGE_PATH, { state: {} })}>Konuşallım mı brooooo</Button>   
+                    <Link onClick={() => {navigate(routes.SignUp_PAGE_PATH)}}>SING UP!</Link>
                 </div>
             </div>
             <DraggableButton/>
-        </>
+        </FullPage>
     );
 
 
