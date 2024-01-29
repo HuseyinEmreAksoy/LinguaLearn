@@ -2,7 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import Draggable from 'react-draggable';
 import IconButton from '@mui/material/IconButton';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { Button, List, ListItem, ListItemButton } from "@mui/material";
+import { List, ListItem, ListItemButton } from "@mui/material";
+import Wrapper from "./Helper/Wrapper";
+import * as routes from "../constants/routePaths";
+import { useNavigate } from "react-router-dom";
 
 function DraggableButton({screenSize}) {
     const buttonRef = useRef();
@@ -10,6 +13,8 @@ function DraggableButton({screenSize}) {
     const [position, setPosition] = useState(defaultPosition);
     const [isOpen, setIsOpen] = useState(false);
     const [listPosition, setListPosition] = useState(defaultPosition);
+
+    const navigate = useNavigate();
 
     const getPosition = () => {
         let specs = buttonRef.current.getBoundingClientRect();
@@ -50,7 +55,7 @@ function DraggableButton({screenSize}) {
 
     if(isOpen) {
         return(
-            <>
+            <Wrapper>
                 {mainButton}
                 <List class="w-32" style={{position:"absolute", left:listPosition.x, top:listPosition.y}}>
                     <ListItem class="bg-red-400 rounded-r-full">
@@ -62,24 +67,24 @@ function DraggableButton({screenSize}) {
                     <ListItem class="bg-yellow-400 rounded-r-full">
                         <ListItemButton><p class="text-white">Yazma</p></ListItemButton>
                     </ListItem>
-                    <ListItem class="bg-lime-400 rounded-r-full">
+                    <ListItem class="bg-lime-400 rounded-r-full" onClick={() => {navigate(routes.VOCABULARY_PAGE_PATH);}}>
                         <ListItemButton><p class="text-white">Kelime Bilgisi</p></ListItemButton>
                     </ListItem>
-                    <ListItem class="bg-cyan-400 rounded-r-full">
+                    <ListItem class="bg-cyan-400 rounded-r-full" onClick={() => {navigate(routes.GRAMMAR_PAGE_PATH);}}>
                         <ListItemButton><p class="text-white">Dil Bilgisi</p></ListItemButton>
                     </ListItem>
                     <ListItem class="bg-purple-400 rounded-r-full">
                         <ListItemButton><p class="text-white">Dinleme</p></ListItemButton>
                     </ListItem>
                 </List>
-            </>
+            </Wrapper>
         );
     }
     else {
         return(
-            <>
+            <Wrapper>
                 {mainButton}
-            </>
+            </Wrapper>
         );
     }
 }
