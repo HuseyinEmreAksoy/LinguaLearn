@@ -1,9 +1,6 @@
 import { useState } from "react";
 import ChatBox from "../components/ChatBox";
-import { Button, TextField } from "@mui/material";
 import Message from "../components/Message";
-import Wrapper from "../components/Helper/Wrapper";
-import useScreenSize from "../hooks/useScreenSize";
 import FullPage from "../components/Helper/FullPage";
 import TextInput from "../components/TextInput";
 import DraggableButton from "../components/DraggableButton";
@@ -18,9 +15,11 @@ function GrammarPage() {
 
     return(
         <FullPage class="bg-pomp_and_power-800">
-            <ChatBox class="w-4/6 h-5/6 mx-auto" messages={messages}></ChatBox>
-            <TextInput send={sendMessage} class="w-4/6 mx-auto"></TextInput>
             <DraggableButton></DraggableButton>
+            <div class="h-5/6 float-bottom">
+                <ChatBox class="w-7/12 h-4/6 mx-auto" messages={messages}></ChatBox>
+                <TextInput send={sendMessage} class="w-7/12 mx-auto mt-3"></TextInput>
+            </div>
         </FullPage>
     );
 }
