@@ -55,7 +55,7 @@ const VocabularyPage = (props) => {
     //Initilize cards
     let cardElements = [];
     if(words.length === 0) {
-        let loadingFlashCard = <FlashCard front="Yükleniyor..." back="Yükleniyor..." update={() => {}}></FlashCard>
+        let loadingFlashCard = <FlashCard front="Yükleniyor..." back="Yükleniyor..." update={() => {}} isFlippable={true}></FlashCard>
         for(let i = 0; i < 6; i++) {
             cardElements.push(loadingFlashCard);
         }
