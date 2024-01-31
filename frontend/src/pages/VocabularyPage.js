@@ -52,15 +52,16 @@ const VocabularyPage = (props) => {
         setAnswers(newAnswers);
     }
 
+    //Initilize cards
     let cardElements = [];
     if(words.length === 0) {
-        let loadingFlashCard = <FlashCard front="Yükleniyor..."></FlashCard>
+        let loadingFlashCard = <FlashCard front="Yükleniyor..." back="Yükleniyor..." update={() => {}}></FlashCard>
         for(let i = 0; i < 6; i++) {
             cardElements.push(loadingFlashCard);
         }
     }
     else {
-        cardElements = words.map((element, index) => {return(<FlashCard front={element[0]} back={element[1]} id={index} update={updateAnswer}></FlashCard>);});
+        cardElements = words.map((element, index) => {return(<FlashCard front={element[0]} back={element[1]} id={index} update={updateAnswer} isFlippable={isSubmitted}></FlashCard>);});
     }
 
     return(
