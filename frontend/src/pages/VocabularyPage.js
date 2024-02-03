@@ -44,7 +44,7 @@ const VocabularyPage = (props) => {
     const updateAnswer = (value, index) => {
         let newAnswers = [];
         for(let i = 0; i < numberOfWord; i++) {
-            if(index != i) 
+            if(index !== i) 
                 newAnswers.push(answers[i]);
             else
                 newAnswers.push(value);
@@ -73,8 +73,8 @@ const VocabularyPage = (props) => {
             }}>
                 {cardElements}
                 <div class="col-start-2 flex justify-center grid grid-cols-2 gap-4">
-                    <Button onClick={handleSubmit} disabled={words.length === 0 || isSubmitted}>SUBMIT</Button>
-                    <Button onClick={fetchNewWords} startIcon={<ReplayIcon></ReplayIcon>}>NEW</Button>
+                    <Button onClick={handleSubmit} disabled={words.length === 0 || isSubmitted}>YÜKLE</Button>
+                    <Button onClick={fetchNewWords} startIcon={<ReplayIcon></ReplayIcon>}>YENİ</Button>
                 </div>
                 {
                     isSubmitted ? 

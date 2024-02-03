@@ -6,3 +6,4 @@ export const SignUp_PAGE_PATH = "/SignUp";
 export const LogIn_PAGE_PATH = "/LogIn";
 export const GRAMMAR_PAGE_PATH = "/Grammar";
 export const VOCABULARY_PAGE_PATH = "/Vocabulary";
+export const READING_PAGE_PATH = "/Reading"

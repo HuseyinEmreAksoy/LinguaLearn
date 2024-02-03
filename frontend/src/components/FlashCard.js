@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react';
 import ReactCardFlip from 'react-card-flip';
 
 const FlashCard = (props) => {
-    const [answer, setAnswer] = useState("");
     const [isFlipped, setIsFlipped] = useState(false);
 
     useEffect(() => {
@@ -16,7 +15,6 @@ const FlashCard = (props) => {
     }, [props.isFlippable]);
 
     const handleChange = (event) => {
-        setAnswer(event.target.value);
         props.update(event.target.value, props.id);
     }
 
