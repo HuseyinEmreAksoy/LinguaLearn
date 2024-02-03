@@ -14,7 +14,7 @@ const VocabularyPage = (props) => {
     for(let i = 0; i < numberOfWord; i++) {
         initialAnswers.push("");
     }
-    const [words, setWords] = useState(dummyWords);
+    const [words, setWords] = useState([]);
     const [answers, setAnswers] = useState(initialAnswers);
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [correntAnswer, setCorrectAnswer] = useState(-1);
@@ -84,6 +84,9 @@ const VocabularyPage = (props) => {
                     :
                         <></>
                 }
+                <div>
+                    <Button onClick={() => {setWords(dummyWords);}}> DummyFetch</Button>
+                </div>
             </div>
         </FullPage>
     );
