@@ -1,7 +1,6 @@
 import { Button, IconButton, TextField } from "@mui/material";
 import SendIcon from '@mui/icons-material/Send';
 import { useState, useEffect, keyDownHandler } from "react";
-import useKeyDown from "../hooks/useKeyDown";
 
 const TextInput = (props) => {
     const [message, setMessage] = useState("");

@@ -8,6 +8,8 @@ import * as routes from './constants/routePaths';
 import VocabularyPage from './pages/VocabularyPage';
 function App() {
 		
+	document.body.style.overflow = "hidden"
+
 	return(
 		<div className="App">
 				<Routes>
