@@ -7,8 +7,7 @@ import SpeechToText from './pages/SpeechToText';
 import * as routes from './constants/routePaths';
 import VocabularyPage from './pages/VocabularyPage';
 function App() {
-	document.body.style.overflow = "clip"
-	
+		
 	return(
 		<div className="App">
 				<Routes>
