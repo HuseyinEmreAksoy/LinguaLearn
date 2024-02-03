@@ -46,7 +46,7 @@ function DraggableButton({screenSize}) {
     }
 
     const mainButton = (
-        <Draggable class="z-10" bounds='parent' defaultPosition={position} onDrag={handleDrag} onStart={handleStart}>
+        <Draggable class="z-40" bounds='parent' defaultPosition={position} onDrag={handleDrag} onStart={handleStart}>
             <IconButton ref={buttonRef} color="secondary" onClick={handleClick}>
                 <AddCircleIcon fontSize="large"></AddCircleIcon>
             </IconButton>
