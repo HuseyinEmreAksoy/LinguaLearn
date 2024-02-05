@@ -16,13 +16,13 @@ const FlashCard = (props) => {
 
     const handleChange = (event) => {
         props.update(event.target.value, props.id);
-    }
+    };
 
     const flip = () => {
         if(props.isFlippable){
             setIsFlipped(!isFlipped);
         }
-    }
+    };
 
     return(
         <ReactCardFlip isFlipped={isFlipped} flipDirection='horizontal'>

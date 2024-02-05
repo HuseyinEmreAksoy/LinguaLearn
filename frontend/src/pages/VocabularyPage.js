@@ -14,15 +14,13 @@ const VocabularyPage = (props) => {
     for(let i = 0; i < numberOfWord; i++) {
         initialAnswers.push("");
     }
-    const [words, setWords] = useState([]);
+    
+    const [words, setWords] = useState(dummyWords);
     const [answers, setAnswers] = useState(initialAnswers);
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [correntAnswer, setCorrectAnswer] = useState(-1);
 
     const handleSubmit = () => {
-        console.log(answers);
-        console.log(words);
-
         setIsSubmitted(true);
         let numberOfCorrectAnswer = 0;
         for(let i = 0; i < numberOfWord; i++) {
@@ -73,8 +71,8 @@ const VocabularyPage = (props) => {
             }}>
                 {cardElements}
                 <div class="col-start-2 flex justify-center grid grid-cols-2 gap-4">
-                    <Button onClick={handleSubmit} disabled={words.length === 0 || isSubmitted}>YÜKLE</Button>
-                    <Button onClick={fetchNewWords} startIcon={<ReplayIcon></ReplayIcon>}>YENİ</Button>
+                    <Button onClick={handleSubmit} disabled={words.length === 0 || isSubmitted}>SUBMIT</Button>
+                    <Button onClick={fetchNewWords} startIcon={<ReplayIcon></ReplayIcon>}>NEW</Button>
                 </div>
                 {
                     isSubmitted ? 
@@ -84,9 +82,6 @@ const VocabularyPage = (props) => {
                     :
                         <></>
                 }
-                <div>
-                    <Button onClick={() => {setWords(dummyWords);}}> DummyFetch</Button>
-                </div>
             </div>
         </FullPage>
     );
