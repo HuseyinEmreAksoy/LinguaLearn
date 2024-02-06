@@ -26,12 +26,14 @@ const ReadingPage = () => {
     const [questions, setQuestions] = useState([]);
     const [answers, setAnswers] = useState([]);
     const [isSubmitDisable, setIsSubmitDisable] = useState(false);
+    let newAnswers2 = [];
 
     useEffect(() => {
         if(answers.length === 0) {
             setIsSubmitDisable(true);
             return;
         }
+
         for(let i = 0; i < answers.length; i++) {
             if(answers === "") {
                 setIsSubmitDisable(true);
@@ -39,7 +41,8 @@ const ReadingPage = () => {
             }
         }
         setIsSubmitDisable(false);
-    }, [answers]);
+        
+    }, [answers, newAnswers2]);
 
     const update = (value, index) => {
         console.log("value " + value);
@@ -50,19 +53,19 @@ const ReadingPage = () => {
         //     return element;
         // });
         let newAnswers = [];
-        for(let i = 0; i < answers.length; i++) {
+        for(let i = 0; i < newAnswers2.length + 1; i++) {
             if(i === index) {
                 newAnswers.push(value);
             }
             else {
-                newAnswers.push(answers[i]);
+                if(newAnswers2[i] !== undefined)
+                    newAnswers.push(newAnswers2[i]);
             }
         }
-        console.log("old ");
-        console.log(answers);
-        console.log("new:");
+
         console.log(newAnswers);
-        setAnswers(newAnswers);
+        newAnswers2 = [...newAnswers]
+        setAnswers(newAnswers2);
     } 
 
     const dummyFetch = () => {
