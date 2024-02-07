@@ -4,6 +4,7 @@ import FullPage from "../components/Helper/FullPage"
 import { useState } from "react";
 import DraggableButton from "../components/DraggableButton";
 import ReplayIcon from '@mui/icons-material/Replay';
+import SendIcon from '@mui/icons-material/Send';
 
 const VocabularyPage = (props) => {
     const numberOfWord = 6;
@@ -64,15 +65,14 @@ const VocabularyPage = (props) => {
 
     return(
         <FullPage>
-            <DraggableButton></DraggableButton>
             <div class="w-9/12 bg-red grid grid-cols-3 gap-8" style={{
                 position: 'absolute', left: '50%', top: '50%',
                 transform: 'translate(-50%, -50%)'
             }}>
                 {cardElements}
                 <div class="col-start-2 justify-center grid grid-cols-2 gap-4">
-                    <Button onClick={handleSubmit} disabled={words.length === 0 || isSubmitted}>SUBMIT</Button>
-                    <Button onClick={fetchNewWords} startIcon={<ReplayIcon></ReplayIcon>}>NEW</Button>
+                    <Button onClick={handleSubmit} disabled={words.length === 0 || isSubmitted} startIcon={<SendIcon></SendIcon>}>GÖNDER</Button>
+                    <Button onClick={fetchNewWords} startIcon={<ReplayIcon></ReplayIcon>}>YENİ</Button>
                 </div>
                 {
                     isSubmitted ? 
@@ -83,6 +83,7 @@ const VocabularyPage = (props) => {
                         <></>
                 }
             </div>
+            <DraggableButton></DraggableButton>
         </FullPage>
     );
 }

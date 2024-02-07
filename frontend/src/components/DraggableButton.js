@@ -45,14 +45,6 @@ function DraggableButton({screenSize}) {
         }
     }
 
-    const mainButton = (
-        <Draggable class="z-10" bounds='parent' defaultPosition={position} onDrag={handleDrag} onStart={handleStart}>
-            <IconButton ref={buttonRef} color="secondary" onClick={handleClick}>
-                <AddCircleIcon fontSize="large"></AddCircleIcon>
-            </IconButton>
-        </Draggable>
-    );
-
     const close = (e) => {
         if (buttonRef.current && !buttonRef.current.contains(e.target)) {
             setIsOpen(false);
@@ -69,11 +61,15 @@ function DraggableButton({screenSize}) {
 
     return(
         <Wrapper>
-            {mainButton}
+            <Draggable bounds='parent' defaultPosition={position} onDrag={handleDrag} onStart={handleStart}>
+                <IconButton ref={buttonRef} color="secondary" onClick={handleClick}>
+                    <AddCircleIcon fontSize="large"></AddCircleIcon>
+                </IconButton>
+            </Draggable>
             {
                 isOpen ?
                     <Wrapper>
-                        <List class="w-32 z-10" style={{position:"absolute", left:listPosition.x, top:listPosition.y}}>
+                        <List class="w-32 z-[100]" style={{position:"absolute", left:listPosition.x, top:listPosition.y}}>
                             <ListItem class="bg-red-400 rounded-r-full" onClick={() => {navigate(routes.SPEAKING_PAGE_PATH);}}>
                                 <ListItemButton><p class="text-white">Konuşma</p></ListItemButton>
                             </ListItem>

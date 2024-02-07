@@ -4,6 +4,7 @@ import Question from "../components/Question";
 import { Button } from "@mui/material";
 import Wrapper from "../components/Helper/Wrapper";
 import ReplayIcon from '@mui/icons-material/Replay';
+import SendIcon from '@mui/icons-material/Send';
 import DraggableButton from "../components/DraggableButton";
 
 const ReadingPage = () => {
@@ -148,7 +149,7 @@ const ReadingPage = () => {
                             {questions}
                         </div>
                         <div class="col-span-6 col-start-4 justify-center grid grid-cols-2 gap-4 mb-10 mt-5">
-                            <Button onClick={handleSubmit}>YÜKLE</Button>
+                            <Button onClick={handleSubmit} startIcon={<SendIcon></SendIcon>}>GÖNDER</Button>
                             <Button onClick={handleNew} startIcon={<ReplayIcon></ReplayIcon>}>YENİ</Button>
                         </div>
                     </div>
