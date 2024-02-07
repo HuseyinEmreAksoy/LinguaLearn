@@ -70,7 +70,7 @@ const VocabularyPage = (props) => {
                 transform: 'translate(-50%, -50%)'
             }}>
                 {cardElements}
-                <div class="col-start-2 flex justify-center grid grid-cols-2 gap-4">
+                <div class="col-start-2 justify-center grid grid-cols-2 gap-4">
                     <Button onClick={handleSubmit} disabled={words.length === 0 || isSubmitted}>SUBMIT</Button>
                     <Button onClick={fetchNewWords} startIcon={<ReplayIcon></ReplayIcon>}>NEW</Button>
                 </div>

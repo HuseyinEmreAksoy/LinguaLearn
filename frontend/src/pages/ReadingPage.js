@@ -4,6 +4,7 @@ import Question from "../components/Question";
 import { Button } from "@mui/material";
 import Wrapper from "../components/Helper/Wrapper";
 import ReplayIcon from '@mui/icons-material/Replay';
+import DraggableButton from "../components/DraggableButton";
 
 const ReadingPage = () => {
 
@@ -129,6 +130,7 @@ const ReadingPage = () => {
 
     return(
         <FullPage class="overflow-y-scroll overflow-x-hidden">
+            <DraggableButton></DraggableButton>
             {
                 (title === "" || text === "" || questions.length === 0) ? 
                     <div class="h-screen flex items-center justify-center">
@@ -137,7 +139,7 @@ const ReadingPage = () => {
                     </div>
                 :
                 <Wrapper>
-                    <div class="flex justify-center mt-20">
+                    <div class="flex justify-center mt-10">
                         <h1>{title}</h1>
                     </div>
                     <div class="grid cols-12 justify-start mt-5 ml-40 mr-40">

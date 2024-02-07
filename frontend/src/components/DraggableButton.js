@@ -53,40 +53,53 @@ function DraggableButton({screenSize}) {
         </Draggable>
     );
 
-    if(isOpen) {
-        return(
-            <Wrapper>
-                {mainButton}
-                <List class="w-32 z-10" style={{position:"absolute", left:listPosition.x, top:listPosition.y}}>
-                    <ListItem class="bg-red-400 rounded-r-full" onClick={() => {navigate(routes.SPEAKING_PAGE_PATH);}}>
-                        <ListItemButton><p class="text-white">Konuşma</p></ListItemButton>
-                    </ListItem>
-                    <ListItem class="bg-orange-400 rounded-r-full" onClick={() => {navigate(routes.READING_PAGE_PATH);}}>
-                        <ListItemButton><p class="text-white">Okuma</p></ListItemButton>
-                    </ListItem>
-                    <ListItem class="bg-yellow-400 rounded-r-full">
-                        <ListItemButton><p class="text-white">Yazma</p></ListItemButton>
-                    </ListItem>
-                    <ListItem class="bg-lime-400 rounded-r-full" onClick={() => {navigate(routes.VOCABULARY_PAGE_PATH);}}>
-                        <ListItemButton><p class="text-white">Kelime Bilgisi</p></ListItemButton>
-                    </ListItem>
-                    <ListItem class="bg-cyan-400 rounded-r-full" onClick={() => {navigate(routes.GRAMMAR_PAGE_PATH);}}>
-                        <ListItemButton><p class="text-white">Dil Bilgisi</p></ListItemButton>
-                    </ListItem>
-                    <ListItem class="bg-purple-400 rounded-r-full">
-                        <ListItemButton><p class="text-white">Dinleme</p></ListItemButton>
-                    </ListItem>
-                </List>
-            </Wrapper>
-        );
+    const close = (e) => {
+        if (buttonRef.current && !buttonRef.current.contains(e.target)) {
+            setIsOpen(false);
+        }
     }
-    else {
-        return(
-            <Wrapper>
-                {mainButton}
-            </Wrapper>
-        );
-    }
+
+    useEffect(() => {
+        window.addEventListener('click', close);
+
+        return () => {
+            window.removeEventListener('click', close);
+        };
+    }, []);
+
+    return(
+        <Wrapper>
+            {mainButton}
+            {
+                isOpen ?
+                    <Wrapper>
+                        <List class="w-32 z-10" style={{position:"absolute", left:listPosition.x, top:listPosition.y}}>
+                            <ListItem class="bg-red-400 rounded-r-full" onClick={() => {navigate(routes.SPEAKING_PAGE_PATH);}}>
+                                <ListItemButton><p class="text-white">Konuşma</p></ListItemButton>
+                            </ListItem>
+                            <ListItem class="bg-orange-400 rounded-r-full" onClick={() => {navigate(routes.READING_PAGE_PATH);}}>
+                                <ListItemButton><p class="text-white">Okuma</p></ListItemButton>
+                            </ListItem>
+                            <ListItem class="bg-yellow-400 rounded-r-full">
+                                <ListItemButton><p class="text-white">Yazma</p></ListItemButton>
+                            </ListItem>
+                            <ListItem class="bg-lime-400 rounded-r-full" onClick={() => {navigate(routes.VOCABULARY_PAGE_PATH);}}>
+                                <ListItemButton><p class="text-white">Kelime Bilgisi</p></ListItemButton>
+                            </ListItem>
+                            <ListItem class="bg-cyan-400 rounded-r-full" onClick={() => {navigate(routes.GRAMMAR_PAGE_PATH);}}>
+                                <ListItemButton><p class="text-white">Dil Bilgisi</p></ListItemButton>
+                            </ListItem>
+                            <ListItem class="bg-purple-400 rounded-r-full">
+                                <ListItemButton><p class="text-white">Dinleme</p></ListItemButton>
+                            </ListItem>
+                        </List>
+                    </Wrapper>
+                :
+                    <></>
+            }
+        </Wrapper>
+    );
+
 }
 
 export default DraggableButton; 
