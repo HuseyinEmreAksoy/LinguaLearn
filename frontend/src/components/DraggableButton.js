@@ -85,7 +85,7 @@ function DraggableButton({screenSize}) {
                             <ListItem class="bg-cyan-400 rounded-r-full" onClick={() => {navigate(routes.GRAMMAR_PAGE_PATH);}}>
                                 <ListItemButton><p class="text-white">Dil Bilgisi</p></ListItemButton>
                             </ListItem>
-                            <ListItem class="bg-purple-400 rounded-r-full">
+                            <ListItem class="bg-purple-400 rounded-r-full" onClick={() => {navigate(routes.LISTENING_PAGE_PATH);}}>
                                 <ListItemButton><p class="text-white">Dinleme</p></ListItemButton>
                             </ListItem>
                         </List>

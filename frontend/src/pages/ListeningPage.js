@@ -7,10 +7,10 @@ import ReplayIcon from '@mui/icons-material/Replay';
 import SendIcon from '@mui/icons-material/Send';
 import DraggableButton from "../components/DraggableButton";
 import LoadingPage from "../components/LoadingPage";
+import TextToSpeech from "../components/TextToSpeech";
 
-const ReadingPage = () => {
+const ListeningPage = () => {
 
-    const [title, setTitle] = useState("");
     const [text, setText] = useState("");
     const [questions, setQuestions] = useState([]);
     const [answers, setAnswers] = useState([]);
@@ -18,6 +18,8 @@ const ReadingPage = () => {
     const [isSubmittable, setIsSubmittable] = useState(false);
     const [numberOfCorrectAnswer, setNumberOfCorrectAnswer] = useState(0);
     let newAnswers = [];
+
+    let dummyText = "Until now, I thought that the best metaphor for filmmaking that I’d ever seen in a movie was found in Akira Kurosawa’s “High and Low”: throwing bags of money out of a speeding train. But Josh and Benny Safdie’s new film, “Uncut Gems,” offers a better, if more elaborate, one, when its protagonist, Howard Ratner (Adam Sandler), a Diamond District jewelry dealer who’s also a compulsive gambler, places a bet on a basketball game. Howard isn’t merely risking money on the outcome; he’s crafting a story that, for the bet to pay off, has to come out right—who wins the opening tip-off, how many points a particular player will score, whether or not the winning team covers the spread. Howard’s story has to correspond to reality, or, rather, vice versa. With his grandiose vision of winning, he’s the ultimate fantasist and, in his mortal dependence on what actually happens, the ultimate realist. He’s a lot like a director behind a camera.";
 
     useEffect(() => {
         handleNew()
@@ -98,7 +100,6 @@ const ReadingPage = () => {
         setQuestions([]);
         setAnswers([]);
         setText("");
-        setTitle("");
         setIsSubmitted(false);
         newAnswers = [];
 
@@ -114,22 +115,18 @@ const ReadingPage = () => {
         setAnswers(newAnswers);
         setQuestions(newQuestions);
         setText(generateString(500));
-        setTitle(generateString(10));
     };
 
     return(
         <FullPage class="overflow-y-scroll overflow-x-hidden">
             <DraggableButton></DraggableButton>
             {
-                (title === "" || text === "" || questions.length === 0) ? 
+                (text === "" || questions.length === 0) ? 
                     <LoadingPage></LoadingPage>
                 :
                 <Wrapper>
-                    <div class="flex justify-center mt-10">
-                        <h1>{title}</h1>
-                    </div>
                     <div class="grid cols-12 justify-start mt-5 ml-40 mr-40">
-                        <p class="col-span-12">{text}</p>
+                        <TextToSpeech class="col-span-4" text={dummyText}></TextToSpeech>
                         <div class="mt-10 col-span-12">
                             {questions}
                         </div>
@@ -152,4 +149,4 @@ const ReadingPage = () => {
     );
 }
 
-export default ReadingPage;
+export default ListeningPage;

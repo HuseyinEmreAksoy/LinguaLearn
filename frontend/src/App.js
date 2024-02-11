@@ -7,6 +7,7 @@ import SpeechToText from './pages/SpeechToText';
 import * as routes from './constants/routePaths';
 import VocabularyPage from './pages/VocabularyPage';
 import ReadingPage from './pages/ReadingPage';
+import ListeningPage from './pages/ListeningPage';
 function App() {
 		
 	document.body.style.overflow = "hidden"
@@ -21,6 +22,7 @@ function App() {
 					<Route path={routes.GRAMMAR_PAGE_PATH} element={<GrammarPage/>}></Route>
 					<Route path={routes.VOCABULARY_PAGE_PATH} element={<VocabularyPage/>}></Route>
 					<Route path={routes.READING_PAGE_PATH} element={<ReadingPage/>}></Route>
+					<Route path={routes.LISTENING_PAGE_PATH} element={<ListeningPage/>}></Route>
 				</Routes>
 	   </div>
 	);

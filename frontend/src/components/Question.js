@@ -22,4 +22,16 @@ const Question = (props) => {
     );
 }
 
+export const createQuestion = (question, a, b, c, d, correctAnswer, update, bgColor) => {
+    return(<Question
+        class={"mt-5" + " " + bgColor}
+        question={question}
+        update={update} 
+        a={a} 
+        b={b} 
+        c={c} 
+        d={d}
+        correctAnswer={correctAnswer} />);
+};
+
 export default Question;
