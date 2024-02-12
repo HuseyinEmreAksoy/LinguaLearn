@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import FullPage from "../components/Helper/FullPage";
-import {Question, createQuestion} from "../components/Question";
+import {createQuestion} from "../components/Question";
 import { Button } from "@mui/material";
 import Wrapper from "../components/Helper/Wrapper";
 import ReplayIcon from '@mui/icons-material/Replay';
@@ -20,13 +20,13 @@ const ReadingPage = () => {
     let newAnswers = [];
 
     useEffect(() => {
-        handleNew()
+        handleNew();
     }, []);
 
     const checkSubmittableState = () => {
         let newIsSubmittable = true;
         for(let i = 0; i < newAnswers.length; i++) {
-            if(newAnswers[i] == "") {
+            if(newAnswers[i] === "") {
                 newIsSubmittable = false;
                 break;
             }

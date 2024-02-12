@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import FullPage from "../components/Helper/FullPage";
-import {Question, createQuestion} from "../components/Question";
+import {createQuestion} from "../components/Question";
 import { Button } from "@mui/material";
 import Wrapper from "../components/Helper/Wrapper";
 import ReplayIcon from '@mui/icons-material/Replay';
@@ -19,7 +19,8 @@ const ListeningPage = () => {
     const [numberOfCorrectAnswer, setNumberOfCorrectAnswer] = useState(0);
     let newAnswers = [];
 
-    let dummyText = "Until now, I thought that the best metaphor for filmmaking that I’d ever seen in a movie was found in Akira Kurosawa’s “High and Low”: throwing bags of money out of a speeding train. But Josh and Benny Safdie’s new film, “Uncut Gems,” offers a better, if more elaborate, one, when its protagonist, Howard Ratner (Adam Sandler), a Diamond District jewelry dealer who’s also a compulsive gambler, places a bet on a basketball game. Howard isn’t merely risking money on the outcome; he’s crafting a story that, for the bet to pay off, has to come out right—who wins the opening tip-off, how many points a particular player will score, whether or not the winning team covers the spread. Howard’s story has to correspond to reality, or, rather, vice versa. With his grandiose vision of winning, he’s the ultimate fantasist and, in his mortal dependence on what actually happens, the ultimate realist. He’s a lot like a director behind a camera.";
+    // let dummyText = "Until now, I thought that the best metaphor for filmmaking that I’d ever seen in a movie was found in Akira Kurosawa’s “High and Low”: throwing bags of money out of a speeding train. But Josh and Benny Safdie’s new film, “Uncut Gems,” offers a better, if more elaborate, one, when its protagonist, Howard Ratner (Adam Sandler), a Diamond District jewelry dealer who’s also a compulsive gambler, places a bet on a basketball game. Howard isn’t merely risking money on the outcome; he’s crafting a story that, for the bet to pay off, has to come out right—who wins the opening tip-off, how many points a particular player will score, whether or not the winning team covers the spread. Howard’s story has to correspond to reality, or, rather, vice versa. With his grandiose vision of winning, he’s the ultimate fantasist and, in his mortal dependence on what actually happens, the ultimate realist. He’s a lot like a director behind a camera.";
+    let dummyText = "Hi, I am a dummy text.";
 
     useEffect(() => {
         handleNew()
@@ -28,7 +29,7 @@ const ListeningPage = () => {
     const checkSubmittableState = () => {
         let newIsSubmittable = true;
         for(let i = 0; i < newAnswers.length; i++) {
-            if(newAnswers[i] == "") {
+            if(newAnswers[i] === "") {
                 newIsSubmittable = false;
                 break;
             }
@@ -126,8 +127,10 @@ const ListeningPage = () => {
                 :
                 <Wrapper>
                     <div class="grid cols-12 justify-start mt-5 ml-40 mr-40">
-                        <TextToSpeech class="col-span-4" text={dummyText}></TextToSpeech>
-                        <div class="mt-10 col-span-12">
+                        <div class="col-start-2 col-span-4">
+                            <TextToSpeech text={dummyText} language="German"></TextToSpeech>
+                        </div>
+                        <div class="mt-3 col-span-12">
                             {questions}
                         </div>
                         <div class="col-span-6 col-start-4 justify-center grid grid-cols-2 gap-4 mb-3 mt-5">

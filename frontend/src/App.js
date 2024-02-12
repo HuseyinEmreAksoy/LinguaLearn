@@ -1,6 +1,6 @@
 import LogInPage from './pages/LogInPage';
 import GrammarPage from './pages/GrammarPage'
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import SignUpPage from './pages/SignUpPage';
 import NoPage from './pages/NoPage';
 import SpeechToText from './pages/SpeechToText';

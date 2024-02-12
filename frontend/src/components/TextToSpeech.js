@@ -1,12 +1,18 @@
-import { Button } from "@mui/material";
+import { Button, MenuItem, FormControl, Select } from "@mui/material";
 import React, { useState, useEffect } from "react";
-import PauseIcon from '@mui/icons-material/Pause';
+import PauseCircleIcon from '@mui/icons-material/PauseCircle';
+import PlayCircleIcon from '@mui/icons-material/PlayCircle';
+import { InputLabel } from "@mui/material";
 
 const TextToSpeech = (props) => {
-  const [isPaused, setIsPaused] = useState(false);
+  const allVoices = window.speechSynthesis.getVoices().filter((voice) => {return voice.name.includes(props.language);});
+  const listeningLimit = 2;
+
+  const [isPaused, setIsPaused] = useState(true);
+  const [isStarted, setIsStarted] = useState(false);
   const [utterance, setUtterance] = useState(null);
-  const [voice, setVoice] = useState(null);
-  const [rate, setRate] = useState(1);
+  const [voice, setVoice] = useState(allVoices[0]);
+  const [numberOfTimesListened, setNumberOfTimesListened] = useState(0);
 
   useEffect(() => {
     const synth = window.speechSynthesis;
@@ -24,65 +30,61 @@ const TextToSpeech = (props) => {
   const handlePlay = () => {
     const synth = window.speechSynthesis;
 
-    if (isPaused) {
-      synth.resume();
-    } else {
+    if(!isStarted) {
       utterance.voice = voice;
-      utterance.rate = rate;
+      utterance.addEventListener("end", handleStop);
       synth.speak(utterance);
+      setIsStarted(true);
     }
+    else if (isPaused) {
+      synth.resume();
+    } 
 
     setIsPaused(false);
   };
 
   const handlePause = () => {
     const synth = window.speechSynthesis;
-
     synth.pause();
-
     setIsPaused(true);
   };
+
+  const handleStop = () => {
+    setNumberOfTimesListened(numberOfTimesListened + 1);
+    setIsStarted(false);
+    setIsPaused(true);
+  }
 
   const handleVoiceChange = (event) => {
     const voices = window.speechSynthesis.getVoices();
     setVoice(voices.find((v) => v.name === event.target.value));
   };
 
-  const handleRateChange = (event) => {
-    setRate(parseFloat(event.target.value));
-  };
-
   return (
-    <div class={props.class}>
-      <label>
-        Voice:
-        <select value={voice?.name} onChange={handleVoiceChange}>
-          {window.speechSynthesis.getVoices().map((voice) => (
-            <option key={voice.name} value={voice.name}>
+    <div>
+      <FormControl fullWidth>
+        <InputLabel id="demo-simple-select-label">Voice:</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={voice}
+          label="Voice:"
+          onChange={handleVoiceChange}
+        >
+          {allVoices.map((voice) => (
+            <MenuItem key={voice.name} value={voice.name}>
               {voice.name}
-            </option>
+            </MenuItem>
           ))}
-        </select>
-      </label>
+        </Select>
+      </FormControl>
 
-      <br />
-
-      <label>
-        Speed:
-        <input
-          type="range"
-          min="0.5"
-          max="2"
-          step="0.1"
-          value={rate}
-          onChange={handleRateChange}
-        />
-      </label>
-
-      <br />
-
-      <Button onClick={handlePlay}>{isPaused ? "Devam" : "Dinle"}</Button>
-      <Button onClick={handlePause} startIcon={<PauseIcon></PauseIcon>}>Duraklat</Button>
+      {
+        isPaused ? 
+          <Button onClick={handlePlay} startIcon={<PlayCircleIcon></PlayCircleIcon>}>{isStarted ? "Devam Ettir" : "Başlat"}</Button>
+        :
+          <Button onClick={handlePause} startIcon={<PauseCircleIcon></PauseCircleIcon>}>Duraklat</Button>
+      }
     </div>
   );
 };
