@@ -127,8 +127,8 @@ const ListeningPage = () => {
                 :
                 <Wrapper>
                     <div class="grid cols-12 justify-start mt-5 ml-40 mr-40">
-                        <div class="col-start-2 col-span-4">
-                            <TextToSpeech text={dummyText} language="German"></TextToSpeech>
+                        <div class="col-start-1 col-span-12">
+                            <TextToSpeech text={dummyText} language="English"></TextToSpeech>
                         </div>
                         <div class="mt-3 col-span-12">
                             {questions}

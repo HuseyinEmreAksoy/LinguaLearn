@@ -1,8 +1,9 @@
-import { Button, MenuItem, FormControl, Select } from "@mui/material";
+import { Button, MenuItem, FormControl, Select, IconButton, Alert } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import PauseCircleIcon from '@mui/icons-material/PauseCircle';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import { InputLabel } from "@mui/material";
+import ReplayIcon from '@mui/icons-material/Replay';
 
 const TextToSpeech = (props) => {
   const allVoices = window.speechSynthesis.getVoices().filter((voice) => {return voice.name.includes(props.language);});
@@ -13,6 +14,7 @@ const TextToSpeech = (props) => {
   const [utterance, setUtterance] = useState(null);
   const [voice, setVoice] = useState(allVoices[0]);
   const [numberOfTimesListened, setNumberOfTimesListened] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     const synth = window.speechSynthesis;
@@ -59,32 +61,48 @@ const TextToSpeech = (props) => {
     const voices = window.speechSynthesis.getVoices();
     setVoice(voices.find((v) => v.name === event.target.value));
   };
-
+  
   return (
-    <div>
-      <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Voice:</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={voice}
-          label="Voice:"
-          onChange={handleVoiceChange}
-        >
-          {allVoices.map((voice) => (
-            <MenuItem key={voice.name} value={voice.name}>
-              {voice.name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-
-      {
-        isPaused ? 
-          <Button onClick={handlePlay} startIcon={<PlayCircleIcon></PlayCircleIcon>}>{isStarted ? "Devam Ettir" : "Başlat"}</Button>
-        :
-          <Button onClick={handlePause} startIcon={<PauseCircleIcon></PauseCircleIcon>}>Duraklat</Button>
-      }
+    <div class="grid cols-12">
+		<div class="col-start-1 col-span-11">
+			<FormControl fullWidth>
+				<InputLabel>Voice:</InputLabel>
+				<Select
+					value={voice}
+					label="Voice:"
+					onChange={handleVoiceChange}
+					size="small"
+				>
+				{allVoices.map((voice) => (
+					<MenuItem key={voice.name} value={voice.name}>
+					{voice.name}
+					</MenuItem>
+				))}
+				</Select>
+			</FormControl>
+		</div>
+		<div class="col-start-12" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+			{
+				isPaused ? 
+				<div>
+					<IconButton disabled={numberOfTimesListened >= listeningLimit} onClick={handlePlay}>
+						<PlayCircleIcon></PlayCircleIcon>
+					</IconButton>
+				</div>
+				:
+				<IconButton onClick={handlePause}>
+					<PauseCircleIcon></PauseCircleIcon>
+				</IconButton>
+			}
+		</div>
+		<div class="col-span-12 mt-2">
+			{
+				isHovered ? 
+					<Alert severity="info">Metni en fazla {listeningLimit} kere dinleyebilirsin!</Alert>
+				:
+					<></>
+			}
+		</div>
     </div>
   );
 };
