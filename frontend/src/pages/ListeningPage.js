@@ -126,7 +126,7 @@ const ListeningPage = () => {
                     <LoadingPage></LoadingPage>
                 :
                 <Wrapper>
-                    <div class="grid cols-12 justify-start mt-5 ml-40 mr-40">
+                    <div class="grid cols-12 justify-start mt-5 flex justify-center">
                         <div class="col-start-1 col-span-12">
                             <TextToSpeech text={dummyText} language="English"></TextToSpeech>
                         </div>
