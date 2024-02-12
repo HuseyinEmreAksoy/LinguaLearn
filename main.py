@@ -1,11 +1,11 @@
-from models.main_mcqa_generator import write_questions, set_models_and_texts_question_answer
+from models.mcqa_generator import write_questions
+from models.gesd import correct_grammar
+from models.models_datasets import get_qa_model, get_gesd_model
 
 def main():
-    MCQ_Generator, texts = set_models_and_texts_question_answer()
+    MCQ_Generator = get_qa_model()
+    GESD_model = get_gesd_model()
 
-    output, generated_questions = write_questions(MCQ_Generator, texts.iloc[5].text)
-    print(output)
     
-
 if __name__ == "__main__":
     main()
