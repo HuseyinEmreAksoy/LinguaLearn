@@ -23,7 +23,7 @@ const ListeningPage = () => {
     let dummyText = "Hi, I am a dummy text.";
 
     useEffect(() => {
-        handleNew()
+        handleNew();
     }, []);
 
     const checkSubmittableState = () => {
@@ -119,14 +119,13 @@ const ListeningPage = () => {
     };
 
     return(
-        <FullPage class="overflow-y-scroll overflow-x-hidden">
+        <FullPage class="overflow-y-auto overflow-x-hidden">
             <DraggableButton></DraggableButton>
             {
                 (text === "" || questions.length === 0) ? 
                     <LoadingPage></LoadingPage>
                 :
-                <Wrapper>
-                    <div class="grid cols-12 justify-start mt-5 flex justify-center">
+                    <div class="grid cols-12 mt-5 justify-center">
                         <div class="col-start-1 col-span-12">
                             <TextToSpeech text={dummyText} language="English"></TextToSpeech>
                         </div>
@@ -146,7 +145,6 @@ const ListeningPage = () => {
                                 <></>
                         }
                     </div>
-                </Wrapper>
             }
         </FullPage>
     );

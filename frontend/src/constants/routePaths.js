@@ -8,3 +8,4 @@ export const GRAMMAR_PAGE_PATH = "/Grammar";
 export const VOCABULARY_PAGE_PATH = "/Vocabulary";
 export const READING_PAGE_PATH = "/Reading"
 export const LISTENING_PAGE_PATH = "/Listening";
+export const WRITING_PAGE_PATH = "/Writing";

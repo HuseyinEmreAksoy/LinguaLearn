@@ -44,6 +44,8 @@ const TextInput = (props) => {
             value={message} 
             onChange={(event) => {setMessage(event.target.value);}} 
             fullWidth 
+            multiline
+            maxRows={3}
             class="col-start-1 col-span-11" id="outlined-basic" 
             variant="outlined" />
             <div>
