@@ -1,11 +1,13 @@
 from models.gesd import set_model_grammer_spelling_check
-from models.mcqa_generator import set_models_and_texts_question_answer
+from models.mcqa_generator import set_model_question_answer
 import pandas as pd
+
+
 QA_MODEL = None
 def get_qa_model():
     global QA_MODEL
     if QA_MODEL is None:
-        QA_MODEL = set_models_and_texts_question_answer()
+        QA_MODEL = set_model_question_answer()
     return QA_MODEL
 
 GESD_MODEL = None

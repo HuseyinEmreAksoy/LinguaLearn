@@ -2,7 +2,7 @@ import random
 from models.trained_models.mcq_generation import MCQGenerator
 import pandas as pd 
 
-def set_models_and_texts_question_answer():
+def set_model_question_answer():
     import nltk
     nltk.download('punkt')
 
