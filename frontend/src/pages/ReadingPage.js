@@ -108,17 +108,17 @@ const ReadingPage = () => {
         let numberOfQuestions = 5;
         for(let i = 0; i < numberOfQuestions; i++) {
             newAnswers.push("");
-            newQuestions.push(createQuestion(generateString(50), generateString(10), generateString(4), generateString(14), generateString(19), "c", 
+            newQuestions.push(createQuestion(generateString(Math.floor(Math.random() * 100) + 50), generateString(10), generateString(4), generateString(14), generateString(19), "c", 
             (value) => {update(value, i);}, ""));
         }
         setAnswers(newAnswers);
         setQuestions(newQuestions);
-        setText(generateString(500));
+        setText(generateString(Math.floor(Math.random() * 1000) + 800));
         setTitle(generateString(10));
     };
 
     return(
-        <FullPage class="overflow-y-scroll overflow-x-hidden">
+        <FullPage class="overflow-y-auto overflow-x-hidden">
             <DraggableButton></DraggableButton>
             {
                 (title === "" || text === "" || questions.length === 0) ? 
