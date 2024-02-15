@@ -2,15 +2,15 @@ import random
 from models.trained_models.mcq_generation import MCQGenerator
 import pandas as pd 
 
-def set_models_and_texts_question_answer():
+def set_model_question_answer():
     import nltk
     nltk.download('punkt')
 
     MCQ_Generator = MCQGenerator(True)
 
-    texts = pd.read_csv("datasets\cefr_leveled_texts.csv")
+    #texts = pd.read_csv("datasets\cefr_leveled_texts.csv")
 
-    return MCQ_Generator, texts
+    return MCQ_Generator #texts
 
 def write_questions(MCQ_Generator, text):
     generated_questions = MCQ_Generator.generate_mcq_questions(text, 10) 
