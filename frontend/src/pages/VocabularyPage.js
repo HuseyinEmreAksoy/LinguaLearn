@@ -5,6 +5,8 @@ import { useState } from "react";
 import DraggableButton from "../components/DraggableButton";
 import ReplayIcon from '@mui/icons-material/Replay';
 import SendIcon from '@mui/icons-material/Send';
+import { ROOT_PATH } from "../constants/apiPaths";
+import axios from "axios";
 
 const VocabularyPage = (props) => {
     const numberOfWord = 6;
@@ -32,10 +34,11 @@ const VocabularyPage = (props) => {
         setCorrectAnswer(numberOfCorrectAnswer);
     }    
 
-    const fetchNewWords = () => {
+    const fetchNewWords = async () => {
         setWords([]);
          
-        //TO-DO: Get 6 new words from somewhere
+        const response = await axios.get("http://localhost:8080/api/v1/word/findByLevel?wordLevel=B2&wordLanguage=English");
+        console.log(response);
         
         setIsSubmitted(false);
     }
