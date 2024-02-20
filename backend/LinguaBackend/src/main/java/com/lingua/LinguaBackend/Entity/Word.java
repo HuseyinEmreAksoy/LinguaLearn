@@ -35,6 +35,9 @@ public class Word {
         this.wordLanguage = wordLanguage;
     }
 
+    public Word() {
+    }
+
     public int getWordId() {
         return wordId;
     }

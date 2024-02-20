@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -18,12 +19,11 @@ public class WordController {
 
     @GetMapping(path = "/findByLevel")
     public ResponseEntity<?> getWordByLevel(@RequestParam String wordLevel, @RequestParam String wordLanguage) {
-        Optional<Word> wordOptional = wordService.findWordByLevel(wordLevel, wordLanguage);
+        List<Word> wordOptional = wordService.findWordByLevel(wordLevel, wordLanguage);
 
-        if (wordOptional.isPresent()) {
-            return ResponseEntity.ok(wordOptional.get());
-        }
-        else {
+        if (!wordOptional.isEmpty()) {
+            return ResponseEntity.ok(wordOptional);
+        } else {
             return ResponseEntity.notFound().build();
         }
     }

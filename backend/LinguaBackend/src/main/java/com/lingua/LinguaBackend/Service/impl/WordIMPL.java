@@ -6,6 +6,7 @@ import com.lingua.LinguaBackend.Service.WordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -14,7 +15,7 @@ public class WordIMPL implements WordService {
     private WordRepo wordRepo;
 
     @Override
-    public Optional<Word> findWordByLevel(String wordLevel, String wordLanguage) {
+    public List<Word> findWordByLevel(String wordLevel, String wordLanguage) {
         return wordRepo.findByLevel(wordLevel, wordLanguage);
     }
 }
