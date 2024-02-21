@@ -8,6 +8,7 @@ import SendIcon from '@mui/icons-material/Send';
 import DraggableButton from "../components/DraggableButton";
 import LoadingPage from "../components/LoadingPage";
 import TextToSpeech from "../components/TextToSpeech";
+import axios from "axios";
 
 const ListeningPage = () => {
 
@@ -18,9 +19,6 @@ const ListeningPage = () => {
     const [isSubmittable, setIsSubmittable] = useState(false);
     const [numberOfCorrectAnswer, setNumberOfCorrectAnswer] = useState(0);
     let newAnswers = [];
-
-    // let dummyText = "Until now, I thought that the best metaphor for filmmaking that I’d ever seen in a movie was found in Akira Kurosawa’s “High and Low”: throwing bags of money out of a speeding train. But Josh and Benny Safdie’s new film, “Uncut Gems,” offers a better, if more elaborate, one, when its protagonist, Howard Ratner (Adam Sandler), a Diamond District jewelry dealer who’s also a compulsive gambler, places a bet on a basketball game. Howard isn’t merely risking money on the outcome; he’s crafting a story that, for the bet to pay off, has to come out right—who wins the opening tip-off, how many points a particular player will score, whether or not the winning team covers the spread. Howard’s story has to correspond to reality, or, rather, vice versa. With his grandiose vision of winning, he’s the ultimate fantasist and, in his mortal dependence on what actually happens, the ultimate realist. He’s a lot like a director behind a camera.";
-    let dummyText = "Hi, I am a dummy text.";
 
     useEffect(() => {
         handleNew();
@@ -115,7 +113,10 @@ const ListeningPage = () => {
         }
         setAnswers(newAnswers);
         setQuestions(newQuestions);
-        setText(generateString(500));
+
+        const response = await axios.get("http://localhost:8080/api/v1/text/findByLevel?textLevel=B2&textLanguage=English");
+        let newTextObject = response.data[Math.floor(Math.random() * response.data.length)];
+        setText(newTextObject.textText);
     };
 
     return(
@@ -127,7 +128,7 @@ const ListeningPage = () => {
                 :
                     <div class="grid cols-12 mt-5 justify-center">
                         <div class="col-start-1 col-span-12">
-                            <TextToSpeech text={dummyText} language="English"></TextToSpeech>
+                            <TextToSpeech text={text} language="English"></TextToSpeech>
                         </div>
                         <div class="mt-3 col-span-12">
                             {questions}

@@ -31,11 +31,11 @@ const TextToSpeech = (props) => {
 
   const handlePlay = () => {
     const synth = window.speechSynthesis;
+    utterance.voice = voice;
+    synth.speak(utterance);
 
     if(!isStarted) {
-      utterance.voice = voice;
       utterance.addEventListener("end", handleStop);
-      synth.speak(utterance);
       setIsStarted(true);
     }
     else if (isPaused) {
@@ -75,7 +75,7 @@ const TextToSpeech = (props) => {
 				>
 				{allVoices.map((voice) => (
 					<MenuItem key={voice.name} value={voice.name}>
-					{voice.name}
+					  {voice.name}
 					</MenuItem>
 				))}
 				</Select>

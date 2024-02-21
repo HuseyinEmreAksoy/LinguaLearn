@@ -7,10 +7,10 @@ import ReplayIcon from '@mui/icons-material/Replay';
 import SendIcon from '@mui/icons-material/Send';
 import DraggableButton from "../components/DraggableButton";
 import LoadingPage from "../components/LoadingPage";
+import axios from "axios";
 
 const ReadingPage = () => {
 
-    const [title, setTitle] = useState("");
     const [text, setText] = useState("");
     const [questions, setQuestions] = useState([]);
     const [answers, setAnswers] = useState([]);
@@ -98,11 +98,8 @@ const ReadingPage = () => {
         setQuestions([]);
         setAnswers([]);
         setText("");
-        setTitle("");
         setIsSubmitted(false);
         newAnswers = [];
-
-        await delay(1000);
 
         let newQuestions = [];
         let numberOfQuestions = 5;
@@ -113,21 +110,20 @@ const ReadingPage = () => {
         }
         setAnswers(newAnswers);
         setQuestions(newQuestions);
-        setText(generateString(Math.floor(Math.random() * 1000) + 800));
-        setTitle(generateString(10));
+
+        const response = await axios.get("http://localhost:8080/api/v1/text/findByLevel?textLevel=B2&textLanguage=English");
+        let newTextObject = response.data[Math.floor(Math.random() * response.data.length)];
+        setText(newTextObject.textText);
     };
 
     return(
         <FullPage class="overflow-y-auto overflow-x-hidden">
             <DraggableButton></DraggableButton>
             {
-                (title === "" || text === "" || questions.length === 0) ? 
+                (text === "" || questions.length === 0) ? 
                     <LoadingPage></LoadingPage>
                 :
                 <Wrapper>
-                    <div class="flex justify-center mt-10">
-                        <h1>{title}</h1>
-                    </div>
                     <div class="grid cols-12 justify-start mt-5 ml-40 mr-40">
                         <p class="col-span-12">{text}</p>
                         <div class="mt-10 col-span-12">
