@@ -1,16 +1,17 @@
 package com.lingua.LinguaBackend.Repo;
 
-import com.lingua.LinguaBackend.Entity.Word;
+import com.lingua.LinguaBackend.Entity.Text;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
 @EnableJpaRepositories
 @Repository
-public interface WordRepo extends JpaRepository<Word, Integer> {
-    @Query("SELECT w FROM Word w where w.wordLanguage = :wordLanguage AND w.wordLevel = :wordLevel")
-    List<Word> findByLevel(@Param("wordLevel") String wordLevel, @Param("wordLanguage") String wordLanguage);
+public interface TextRepo extends JpaRepository<Text, Integer> {
+    @Query("SELECT t From Text t where t.textLanguage = :textLanguage AND t.textLevel = :textLevel")
+    List<Text> findByLevel(@Param("textLevel") String textLevel, @Param("textLanguage") String textLanguage);
 }
