@@ -113,7 +113,6 @@ const ReadingPage = () => {
 
         const response = await axios.get("http://localhost:8080/api/v1/text/findByLevel?textLevel=B2&textLanguage=English");
         let newTextObject = response.data[Math.floor(Math.random() * response.data.length)];
-
         setText(newTextObject.textText);
     };
 
