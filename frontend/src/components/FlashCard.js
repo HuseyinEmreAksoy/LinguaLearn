@@ -2,19 +2,24 @@ import { TextField } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import {CardActions} from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ReactCardFlip from 'react-card-flip';
 
 const FlashCard = (props) => {
     const [isFlipped, setIsFlipped] = useState(false);
+    const [value, setValue] = useState("");
 
     useEffect(() => {
+        if(!props.isFlippable) {
+            setValue("");
+        }
         if(!props.isFlippable) {
             setIsFlipped(false);
         }
     }, [props.isFlippable]);
 
     const handleChange = (event) => {
+        setValue(event.target.value);
         props.update(event.target.value, props.id);
     };
 
@@ -31,7 +36,7 @@ const FlashCard = (props) => {
                     <p class="flex justify-center mt-12 mb-24">{props.front}</p>
                 </CardContent>
                 <CardActions class="flex justify-center">
-                    <TextField class="m-3" onChange={handleChange} size='small'></TextField>
+                    <TextField class="m-3" value={value} onChange={handleChange} size='small'></TextField>
                 </CardActions>
             </Card>
 
