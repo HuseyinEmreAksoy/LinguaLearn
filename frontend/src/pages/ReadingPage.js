@@ -12,7 +12,9 @@ import axios from "axios";
 const ReadingPage = () => {
 
     const [text, setText] = useState("");
+    const [textLevel, setTextLevel] = useState("B2");
     const [questions, setQuestions] = useState([]);
+    const [sıklar, setSıklar] = useState([]);
     const [answers, setAnswers] = useState([]);
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [isSubmittable, setIsSubmittable] = useState(false);
@@ -33,6 +35,7 @@ const ReadingPage = () => {
         }
         setIsSubmittable(newIsSubmittable);
     };
+
 
     const update = (value, index) => {
         for(let i = 0; i < newAnswers.length; i++) {
@@ -111,9 +114,18 @@ const ReadingPage = () => {
         setAnswers(newAnswers);
         setQuestions(newQuestions);
 
-        const response = await axios.get("http://localhost:8080/api/v1/text/findByLevel?textLevel=B2&textLanguage=English");
-        let newTextObject = response.data[Math.floor(Math.random() * response.data.length)];
-        setText(newTextObject.textText);
+        const response = await axios.get(`http://localhost:8080/api/v1/text/findByLevel?textLevel=${textLevel}&textLanguage=English`);
+        const dataArray = response.data; 
+
+        let randomElement;
+        if (dataArray.length > 0) {
+            const randomIndex = Math.floor(Math.random() * dataArray.length);
+            randomElement = dataArray[randomIndex];
+        }
+
+        const qa = await axios.post('http://127.0.0.1:8000/qaGenerator', { text: randomElement.textText });
+        console.log("res", qa.data);
+        setText(randomElement.textText);
     };
 
     return(

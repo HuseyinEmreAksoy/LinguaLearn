@@ -1,24 +1,39 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import ChatBox from "../components/ChatBox";
 import Message from "../components/Message";
 import FullPage from "../components/Helper/FullPage";
 import TextInput from "../components/TextInput";
 import DraggableButton from "../components/DraggableButton";
+import axios from 'axios';
 
 function GrammarPage() {
-    const [messages, setMessages] = useState([]);
+    const [chatHistory, setChatHistory] = useState([]);
 
-    const sendMessage = (text, align) => {
-        let messageComponent = (<Message text={text} align={align}></Message>);
-        setMessages([...messages, messageComponent]);
-    }
+    const addMessageToChatHistory = (text, type) => {
+        setChatHistory(chatHistory => [...chatHistory, { type, content: text }]);
+    };
 
-    return(
+    const sendMessage = (text) => {
+        addMessageToChatHistory(text, 'message');
+        grammerCheck(text);
+    };
+
+    const grammerCheck = async (text) => {
+        try {
+            const response = await axios.post('http://127.0.0.1:8000/grammarCorrection', { text });
+            addMessageToChatHistory(response.data.corrected_text, 'response');
+        } catch (err) {
+            console.error('Grammar check failed:', err);
+            alert('Grammar check failed!');
+        }
+    };
+
+    return (
         <FullPage class="bg-pomp_and_power-800">
             <DraggableButton></DraggableButton>
             <div class="h-5/6 float-bottom">
-                <ChatBox class="w-7/12 h-4/6 mx-auto" messages={messages}></ChatBox>
-                <TextInput send={sendMessage} class="w-7/12 mx-auto mt-3"></TextInput>
+                <ChatBox class="w-7/12 h-4/6 mx-auto" chatHistory={chatHistory} />
+                <TextInput send={sendMessage} class="w-7/12 mx-auto mt-3" />
             </div>
         </FullPage>
     );
