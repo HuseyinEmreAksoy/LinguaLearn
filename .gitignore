@@ -4,4 +4,7 @@ launch.json
 package-lock.json
 package.json
 node_modules
+s2v_old
+*.ckpt
+c4_200m
 ```
