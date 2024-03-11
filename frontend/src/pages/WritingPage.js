@@ -5,11 +5,15 @@ import { Button } from "@mui/material";
 import SendIcon from '@mui/icons-material/Send';
 import ReplayIcon from '@mui/icons-material/Replay';
 import {TextField} from "@mui/material";
+import Wrapper from "../components/Helper/Wrapper";
+import axios from "axios";
 
 const WritingPage = () => {
 
     const [subject, setSubject] = useState("");
     const [text, setText] = useState("");
+    const [isSubmitted, setIsSubmitted] = useState(false);
+    const [correctedText, setCorrectedText] = useState("");
 
     useEffect(() => {
         handleNew();
@@ -39,17 +43,18 @@ const WritingPage = () => {
      //******************************************************************************************************************************************
 
     const handleNew = async () => {
+        setIsSubmitted(false);
+        setCorrectedText("");
         setText("");
-        setSubject("Loading...");
-
-        await delay(1000);
-
         setSubject(generateString(Math.floor(Math.random() * 10) + 20));
-        // setSubject("");
     }
 
-    const handleSubmit = () => {
-        //TO-DO: Evaluate text and return sth to user
+    const handleSubmit = async () => {
+        setIsSubmitted(true);
+        const response = await axios.post('http://127.0.0.1:8000/grammarCorrection', { text });
+        console.log("came", response);
+        setText(response.data.corrected_text[0]);
+        setIsSubmitted(false);
     }
 
     return(
@@ -60,26 +65,36 @@ const WritingPage = () => {
                     <div class="col-span-12 flex justify-start mt-5 mb-7 ml-5">
                         <h1>{subject}</h1>
                     </div>
-                    <div class="col-span-12">
-                        <TextField
-                            id="outlined-multiline-flexible"
-                            label="Your Text"
-                            fullWidth
-                            multiline
-                            rows={23}
-                            onChange={handleChange}
-                            value={text}
-                            sx={{
-                                "& .MuiInputBase-root": {
-                                    height: "30%"
-                                }
-                            }}
-                        />
-                    </div>
-                    <div class="col-span-6 col-start-4 justify-center grid grid-cols-2 gap-4 mb-3 mt-5">
-                        <Button onClick={handleSubmit} disabled={text===""} startIcon={<SendIcon></SendIcon>}>GÖNDER</Button>
-                        <Button onClick={handleNew} startIcon={<ReplayIcon></ReplayIcon>}>YENİ</Button>
-                    </div>
+                    {
+                        true ?
+                            <Wrapper>
+                                <div class="col-span-12">
+                                    <TextField
+                                        id="outlined-multiline-flexible"
+                                        label="Your Text"
+                                        fullWidth
+                                        multiline
+                                        rows={23}
+                                        onChange={handleChange}
+                                        value={text}
+                                        sx={{
+                                            "& .MuiInputBase-root": {
+                                                height: "30%"
+                                            }
+                                        }}
+                                    />
+                                </div>
+                                <div class="col-span-6 col-start-4 justify-center grid grid-cols-2 gap-4 mb-3 mt-5">
+                                    <Button onClick={handleSubmit} disabled={text==="" || isSubmitted} startIcon={<SendIcon></SendIcon>}>GÖNDER</Button>
+                                    <Button onClick={handleNew} startIcon={<ReplayIcon></ReplayIcon>}>YENİ</Button>
+                                </div>
+                            </Wrapper>
+                        :
+                            <div class="col-span-12">
+                                <p>{correctedText}</p>
+                            </div>
+                    }
+                    
                 </div>
             </div> 
         </FullPage>
