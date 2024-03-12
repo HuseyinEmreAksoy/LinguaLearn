@@ -136,7 +136,12 @@ const ReadingPage = () => {
                                 </Wrapper>
                             :
                                 <div class="col-span-2 col-start-6 mt-10 mb-10">
-                                    <Button onClick={() => {setIsQuestionsVisible(true);}} disabled={questions.length === 0}>Soruları Göster</Button>
+                                    {
+                                        questions.length === 0 ?
+                                            <Button disabled={true}>Sorular Yükleniyor...</Button>
+                                        :
+                                            <Button onClick={() => {setIsQuestionsVisible(true);}} disabled={questions.length === 0}>Soruları Göster</Button>
+                                    }
                                 </div>
                         }
                     </div>
