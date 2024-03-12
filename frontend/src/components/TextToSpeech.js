@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import PauseCircleIcon from '@mui/icons-material/PauseCircle';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import { InputLabel } from "@mui/material";
-import ReplayIcon from '@mui/icons-material/Replay';
 
 const TextToSpeech = (props) => {
 	const allVoices = window.speechSynthesis.getVoices().filter((voice) => { return voice.name.includes(props.language); });
@@ -14,15 +13,12 @@ const TextToSpeech = (props) => {
 	const [utterance, setUtterance] = useState(null);
 	const [voice, setVoice] = useState(allVoices[0]);
 	const [numberOfTimesListened, setNumberOfTimesListened] = useState(0);
-	const [isHovered, setIsHovered] = useState(false);
 
 	useEffect(() => {
 		const synth = window.speechSynthesis;
 		const u = new SpeechSynthesisUtterance(props.text);
-		const voices = synth.getVoices();
-
+			
 		setUtterance(u);
-		setVoice(voices[0]);
 
 		return () => {
 			synth.cancel();
@@ -58,8 +54,7 @@ const TextToSpeech = (props) => {
 	}
 
 	const handleVoiceChange = (event) => {
-		const voices = window.speechSynthesis.getVoices();
-		setVoice(voices.find((v) => v.name === event.target.value));
+		setVoice(allVoices.find((v) => v.name === event.target.value));
 	};
 
 	return (
@@ -68,6 +63,7 @@ const TextToSpeech = (props) => {
 				<FormControl fullWidth>
 					<InputLabel>Aksan:</InputLabel>
 					<Select
+						disabled={isStarted}
 						value={voice}
 						label="Voice:"
 						onChange={handleVoiceChange}
