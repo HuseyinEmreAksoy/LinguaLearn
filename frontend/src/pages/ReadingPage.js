@@ -96,7 +96,6 @@ const ReadingPage = () => {
         setText(randomElement.textText);
 
         const qa = await axios.post('http://127.0.0.1:8000/qaGenerator', { text: randomElement.textText });
-        console.log("res", qa.data);
         let newQuestions = [];
         for(let i = 0; i < qa.data.length; i++) {
             newAnswers.push("");

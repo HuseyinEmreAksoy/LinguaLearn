@@ -52,10 +52,12 @@ function DraggableButton({screenSize}) {
     }
 
     useEffect(() => {
+        window.addEventListener('scroll', close, true);   
         window.addEventListener('click', close);
 
         return () => {
             window.removeEventListener('click', close);
+            window.removeEventListener('scroll', close, true);
         };
     }, []);
 
