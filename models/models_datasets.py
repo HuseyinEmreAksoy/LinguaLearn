@@ -17,7 +17,7 @@ def get_gesd_model():
     global TOKENIZER
     if GESD_MODEL is None or TOKENIZER is None:
         GESD_MODEL, TOKENIZER = set_model_grammer_spelling_check()
-    return GESD_MODEL, TOKENIZER
+    return {"model": GESD_MODEL, "tokenizer": TOKENIZER}
 
 LEVELED_TEXTS = None
 def get_leveled_texts():
