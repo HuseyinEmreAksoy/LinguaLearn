@@ -23,13 +23,17 @@ public class User {
     @Column(name = "user_mainLanguage", length = 255)
     private String userMainLanguage;
 
+    @Column(name = "user_level", length = 255)
+    private int userLvl;
 
-    public User(int userId, String userName, String userEmail, String userPassword, String userMainLanguage) {
+    public User(int userId, String userName, String userEmail, String userPassword, String userMainLanguage,int userLvl) {
         this.userId = userId;
         this.userName = userName;
         this.userEmail = userEmail;
         this.userPassword = userPassword;
         this.userMainLanguage = userMainLanguage;
+        this.userLvl = userLvl;
+
     }
 
     public User() {
@@ -75,6 +79,14 @@ public class User {
         this.userMainLanguage = userMainLanguage;
     }
 
+    public int getUserLvl() {
+        return userLvl;
+    }
+
+    public void setUserLvl(int userLvl) {
+        this.userLvl = userLvl;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -83,6 +95,7 @@ public class User {
                 ", userEmail='" + userEmail + '\'' +
                 ", userPassword='" + userPassword + '\'' +
                 ", userMainLanguage='" + userMainLanguage + '\'' +
+                ", userLvl='" + userLvl + '\'' +
                 '}';
     }
 }

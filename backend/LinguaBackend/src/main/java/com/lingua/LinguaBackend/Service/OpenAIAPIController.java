@@ -15,7 +15,7 @@ public class OpenAIAPIController {
     private String url;
     @Autowired
     private RestTemplate restTemplate;
-
+    @CrossOrigin
     @PostMapping("/chat")
     public String chat(@RequestBody String prompt){
         ChatGPTRequest chatGPTRequest = new ChatGPTRequest(model, prompt);

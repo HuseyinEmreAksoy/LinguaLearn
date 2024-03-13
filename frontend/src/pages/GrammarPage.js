@@ -20,8 +20,9 @@ function GrammarPage() {
 
     const grammerCheck = async (text) => {
         try {
-            const response = await axios.post('http://127.0.0.1:8000/grammarCorrection', { text });
-            addMessageToChatHistory(response.data.corrected_text, 'response');
+            const data = { prompt: text };
+            const response = await axios.post('http://localhost:8080/chat', { prompt: text });
+            addMessageToChatHistory(response.data, 'response');
         } catch (err) {
             console.error('Grammar check failed:', err);
             alert('Grammar check failed!');

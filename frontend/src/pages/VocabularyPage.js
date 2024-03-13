@@ -7,9 +7,11 @@ import ReplayIcon from '@mui/icons-material/Replay';
 import SendIcon from '@mui/icons-material/Send';
 import { ROOT_PATH } from "../constants/apiPaths";
 import axios from "axios";
+import useScreenSize from "../hooks/useScreenSize";
 
 const VocabularyPage = (props) => {
     const numberOfWord = 6;
+    const screenSize = useScreenSize();
 
     // const dummyWords = [["Mouse", "Fare"], ["Yellow", "Sarı"], ["Backpack", "Sırt Çantası"], ["Apple", "Elma"], ["Water", "Su"], ["Who", "Kim"]];
     let initialAnswers = [];
@@ -83,17 +85,20 @@ const VocabularyPage = (props) => {
         }
     }
     else {
-        cardElements = words.map((element, index) => {return(<FlashCard front={element[0]} back={element[1]} id={index} update={updateAnswer} isFlippable={isSubmitted}></FlashCard>);});
+        cardElements = words.map((element, index) => {return(<FlashCard             
+            class={`bg-gradient-to-r ${index % 2 === 0 ? 'from-orange-300 to-yellow-200' : 'from-pink-300 to-yellow-200'}`} 
+            front={element[0]} back={element[1]} id={index} update={updateAnswer} isFlippable={isSubmitted}></FlashCard>);});
     }
 
     return(
-        <FullPage>
-            <div class="w-9/12 bg-red grid grid-cols-3 gap-8" style={{
+        <div class="flex justify-center items-center min-h-screen" style={{width: screenSize.width, height: screenSize.height, background: 'linear-gradient(to right, #dae2f8, #d6a4a4)'}}>
+
+            <div class="w-9/12 bg-red grid grid-cols-3 gap-8 mt-4" style={{
                 position: 'absolute', left: '50%', top: '50%',
                 transform: 'translate(-50%, -50%)'
             }}>
                 {cardElements}
-                <div class="col-start-2 justify-center grid grid-cols-2 gap-4">
+                <div class="col-start-2 justify-center grid grid-cols-2 gap-4 mb-4">
                     <Button onClick={handleSubmit} disabled={words.length === 0 || isSubmitted} startIcon={<SendIcon></SendIcon>}>GÖNDER</Button>
                     <Button onClick={handleNew} startIcon={<ReplayIcon></ReplayIcon>}>YENİ</Button>
                 </div>
@@ -107,7 +112,8 @@ const VocabularyPage = (props) => {
                 }
             </div>
             <DraggableButton></DraggableButton>
-        </FullPage>
+
+        </div>
     );
 }
 

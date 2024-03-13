@@ -21,7 +21,8 @@ public class UserIMPL implements UserService {
                 userDto.getUserName(),
                 userDto.getUserEmail(),
                 userDto.getUserPassword(),
-                userDto.getUserMainLanguage());
+                userDto.getUserMainLanguage(),
+                userDto.getUserLvl());
 
         userRepo.save(user);
 

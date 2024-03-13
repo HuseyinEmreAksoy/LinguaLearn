@@ -12,7 +12,7 @@ public class ChatGPTRequest {
     private String model;
 
    private List<ChatMessage> messages;
-    private int max_tokens=150;
+    private int max_tokens=300;
     public ChatGPTRequest(String model, String prompt) {
         this.model = model;
         this.messages = new ArrayList<ChatMessage>() ;
