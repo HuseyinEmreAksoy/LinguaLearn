@@ -10,16 +10,26 @@ public class UserDto {
     private String userEmail;
     private String userPassword;
     private String userMainLanguage;
+    private int userLvl;
 
-    public UserDto(int userId, String userName, String userEmail, String userPassword, String userMainLanguage) {
+    public UserDto(int userId, String userName, String userEmail, String userPassword, String userMainLanguage, int userLvl) {
         this.userId = userId;
         this.userName = userName;
         this.userEmail = userEmail;
         this.userPassword = userPassword;
         this.userMainLanguage = userMainLanguage;
+        this.userLvl = userLvl;
     }
 
     public UserDto() {
+    }
+
+    public int getUserLvl() {
+        return userLvl;
+    }
+
+    public void setUserLvl(int userLvl) {
+        this.userLvl = userLvl;
     }
 
     public int getUserId() {
@@ -70,6 +80,7 @@ public class UserDto {
                 ", userEmail='" + userEmail + '\'' +
                 ", userPassword='" + userPassword + '\'' +
                 ", userMainLanguage='" + userMainLanguage + '\'' +
+                ", userLvl='" + userLvl + '\'' +
                 '}';
     }
 }

@@ -7,4 +7,5 @@ node_modules
 s2v_old
 *.ckpt
 c4_200m
+/myenv
 ```

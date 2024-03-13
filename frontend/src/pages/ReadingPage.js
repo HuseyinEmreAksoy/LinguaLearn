@@ -1,43 +1,33 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import FullPage from "../components/Helper/FullPage";
-import Question from "../components/Question";
+import { createQuestion } from "../components/Question";
 import { Button } from "@mui/material";
-import Wrapper from "../components/Helper/Wrapper";
 import ReplayIcon from '@mui/icons-material/Replay';
 import SendIcon from '@mui/icons-material/Send';
 import DraggableButton from "../components/DraggableButton";
+import LoadingPage from "../components/LoadingPage";
+import axios from "axios";
 
 const ReadingPage = () => {
 
-    const [title, setTitle] = useState("");
     const [text, setText] = useState("");
+    const [textLevel, setTextLevel] = useState("B2");
     const [questions, setQuestions] = useState([]);
     const [answers, setAnswers] = useState([]);
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [isSubmittable, setIsSubmittable] = useState(false);
     const [numberOfCorrectAnswer, setNumberOfCorrectAnswer] = useState(0);
+    const [isQuestionsVisible, setIsQuestionsVisible] = useState(false);
     let newAnswers = [];
 
     useEffect(() => {
-        handleNew()
+        handleNew();
     }, []);
-
-    const createQuestion = (question, a, b, c, d, correctAnswer, update, bgColor) => {
-        return(<Question
-            class={"mt-5" + " " + bgColor}
-            question={question}
-            update={update} 
-            a={a} 
-            b={b} 
-            c={c} 
-            d={d}
-            correctAnswer={correctAnswer} />);
-    };
 
     const checkSubmittableState = () => {
         let newIsSubmittable = true;
-        for(let i = 0; i < newAnswers.length; i++) {
-            if(newAnswers[i] == "") {
+        for (let i = 0; i < newAnswers.length; i++) {
+            if (newAnswers[i] === "") {
                 newIsSubmittable = false;
                 break;
             }
@@ -46,8 +36,8 @@ const ReadingPage = () => {
     };
 
     const update = (value, index) => {
-        for(let i = 0; i < newAnswers.length; i++) {
-            if(i === index) {
+        for (let i = 0; i < newAnswers.length; i++) {
+            if (i === index) {
                 newAnswers[i] = value;
             }
         }
@@ -65,14 +55,14 @@ const ReadingPage = () => {
 
     const changeQuestionColor = (index, color) => {
         let oldProps = questions[index].props;
-        return createQuestion(oldProps.question, oldProps.a, oldProps.b, oldProps.c, oldProps.d, oldProps.correctAnswer, oldProps.update, color);
+        return createQuestion(oldProps.question, oldProps.choices, oldProps.correctAnswer, oldProps.update, color);
     };
 
     const handleSubmit = () => {
         let newQuestions = [];
         let newNumberOfCorrectAnswer = 0;
-        for(let i = 0; i < questions.length; i++) {
-            if(questions[i].props.correctAnswer === answers[i]) {
+        for (let i = 0; i < questions.length; i++) {
+            if (questions[i].props.correctAnswer === answers[i]) {
                 newQuestions.push(turnQuestionGreen(i));
                 newNumberOfCorrectAnswer += 1;
             }
@@ -86,80 +76,83 @@ const ReadingPage = () => {
         setIsSubmittable(false);
     };
 
-    //TO-DO: Delete this part of code after establish the connection to backend ****************************************************************
-    const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz      ';
-    
-    function generateString(length) {
-        let result = ' ';
-        const charactersLength = characters.length;
-        for ( let i = 0; i < length; i++ ) {
-            result += characters.charAt(Math.floor(Math.random() * charactersLength));
-        }
-
-        return result;
-    };
-
-    const delay = ms => new Promise(
-        resolve => setTimeout(resolve, ms)
-      );
-
-     //******************************************************************************************************************************************
-
     const handleNew = async () => {
+        setIsQuestionsVisible(false);
         setQuestions([]);
         setAnswers([]);
         setText("");
-        setTitle("");
         setIsSubmitted(false);
         newAnswers = [];
 
-        await delay(1000);
+        const response = await axios.get(`http://localhost:8080/api/v1/text/findByLevel?textLevel=${textLevel}&textLanguage=English`);
+        const dataArray = response.data;
 
+        let randomElement;
+        if (dataArray.length > 0) {
+            const randomIndex = Math.floor(Math.random() * dataArray.length);
+            randomElement = dataArray[randomIndex];
+        }
+        setText(randomElement.textText);
+
+        const qa = await axios.post('http://127.0.0.1:8000/qaGenerator', { text: randomElement.textText });
         let newQuestions = [];
-        let numberOfQuestions = 5;
-        for(let i = 0; i < numberOfQuestions; i++) {
+        for (let i = 0; i < qa.data.length; i++) {
             newAnswers.push("");
-            newQuestions.push(createQuestion(generateString(50), generateString(10), generateString(4), generateString(14), generateString(19), "c", 
-            (value) => {update(value, i);}, ""));
+            newQuestions.push(createQuestion(qa.data[i].questionText, qa.data[i].distractors, qa.data[i].answerText, (value) => { update(value, i); }, ""));
         }
         setAnswers(newAnswers);
         setQuestions(newQuestions);
-        setText(generateString(500));
-        setTitle(generateString(10));
     };
 
-    return(
-        <FullPage class="overflow-y-scroll overflow-x-hidden">
-            <DraggableButton></DraggableButton>
+    return (
+        <FullPage class="overflow-y-auto overflow-x-hidden bg-blue-50">
+            <DraggableButton />
             {
-                (title === "" || text === "" || questions.length === 0) ? 
-                    <div class="h-screen flex items-center justify-center">
-                        <h1>Yükleniyor...</h1>
-                    </div>
-                :
-                <Wrapper>
-                    <div class="flex justify-center mt-10">
-                        <h1>{title}</h1>
-                    </div>
-                    <div class="grid cols-12 justify-start mt-5 ml-40 mr-40">
-                        <p class="col-span-12">{text}</p>
-                        <div class="mt-10 col-span-12">
-                            {questions}
-                        </div>
-                        <div class="col-span-6 col-start-4 justify-center grid grid-cols-2 gap-4 mb-3 mt-5">
-                            <Button onClick={handleSubmit} disabled={!isSubmittable} startIcon={<SendIcon></SendIcon>}>GÖNDER</Button>
-                            <Button onClick={handleNew} startIcon={<ReplayIcon></ReplayIcon>}>YENİ</Button>
-                        </div>
-                        {
-                            isSubmitted ?
-                                <div class="col-span-6 col-start-4 mb-10">
-                                    <p class="flex justify-center">{numberOfCorrectAnswer} doğru cevabınız var!</p>
+                (text === "") ?
+                    <LoadingPage />
+                    :
+                    <div class="p-4 md:p-10">
+                        <div class="max-w-4xl mx-auto">
+                            <div class="bg-white shadow rounded-lg p-6 mb-6">
+                                <p class="text-gray-800 text-lg">{text}</p>
+                            </div>
+                            {isQuestionsVisible ? (
+                                <>
+                                    <div class="space-y-4">
+                                        {questions.map((question, index) => (
+                                            <div key={index} class="bg-white shadow rounded-lg p-4">
+                                                {question}
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <div class="flex justify-center space-x-4 mt-4">
+                                        <Button variant="contained" style={{ backgroundColor: "#1976d2", color: "white" }} onClick={handleSubmit} disabled={!isSubmittable} startIcon={<SendIcon />}>Submit</Button>
+                                        <Button variant="outlined" style={{ borderColor: "#ff9800", color: "#ff9800" }} onClick={handleNew} startIcon={<ReplayIcon />}>New</Button>
+                                    </div>
+                                    {isSubmitted && (
+                                        <div class="text-center mt-4">
+                                            <p>{numberOfCorrectAnswer} correct answers!</p>
+                                        </div>
+                                    )}
+                                </>
+                            ) : (
+                                <div className="flex justify-center mt-4">
+                                    <Button
+                                        variant="contained"
+                                        style={{
+                                            backgroundColor: questions.length === 0 ? "#90caf9" : "#1976d2",
+                                            color: "white",
+                                            transition: "background-color 0.3s", 
+                                        }}
+                                        onClick={() => setIsQuestionsVisible(true)}
+                                        disabled={questions.length === 0}
+                                    >
+                                        Show Questions
+                                    </Button>
                                 </div>
-                            :
-                                <></>
-                        }
+                            )}
+                        </div>
                     </div>
-                </Wrapper>
             }
         </FullPage>
     );

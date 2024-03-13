@@ -1,12 +1,14 @@
 import LogInPage from './pages/LogInPage';
 import GrammarPage from './pages/GrammarPage'
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import SignUpPage from './pages/SignUpPage';
 import NoPage from './pages/NoPage';
 import SpeechToText from './pages/SpeechToText';
 import * as routes from './constants/routePaths';
 import VocabularyPage from './pages/VocabularyPage';
 import ReadingPage from './pages/ReadingPage';
+import ListeningPage from './pages/ListeningPage';
+import WritingPage from './pages/WritingPage';
 function App() {
 		
 	document.body.style.overflow = "hidden"
@@ -21,6 +23,8 @@ function App() {
 					<Route path={routes.GRAMMAR_PAGE_PATH} element={<GrammarPage/>}></Route>
 					<Route path={routes.VOCABULARY_PAGE_PATH} element={<VocabularyPage/>}></Route>
 					<Route path={routes.READING_PAGE_PATH} element={<ReadingPage/>}></Route>
+					<Route path={routes.LISTENING_PAGE_PATH} element={<ListeningPage/>}></Route>
+					<Route path={routes.WRITING_PAGE_PATH} element={<WritingPage/>}></Route>
 				</Routes>
 	   </div>
 	);

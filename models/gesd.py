@@ -2,7 +2,7 @@ import torch
 from transformers import T5Tokenizer, T5ForConditionalGeneration
 
 def set_model_grammer_spelling_check():
-    model_name = 'models\\trained_models\\grammer_spelling_checker\\c4_200m\\weights\\checkpoint-4500'
+    model_name = 'models/trained_models/grammer_spelling_checker/c4_200m/weights/checkpoint-4500'
     torch_device = 'cuda' if torch.cuda.is_available() else 'cpu'
     tokenizer = T5Tokenizer.from_pretrained(model_name)
     gesd_model = T5ForConditionalGeneration.from_pretrained(model_name).to(torch_device)
