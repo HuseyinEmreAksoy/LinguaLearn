@@ -42,9 +42,22 @@ async def startup_event():
 
 @app.post("/grammarCorrection")
 async def grammar_correction(request: GrammarCorrectionInput):
-    corrected_text = correct_grammar(GESD_model, tokenizer, request.text, 4)
-    return {"corrected_text": corrected_text}
+    text = get_correct_text_recursively(get_gesd_model()["model"], get_gesd_model()["tokenizer"], request.text)
+    return {"corrected_text": text}
 
+def get_correct_text_recursively(model, tokenizer, input_text):
+    texts = correct_grammar(get_gesd_model()["model"], get_gesd_model()["tokenizer"], input_text, 4)
+    possible_text = {}
+    for text in texts:
+        temp = correct_grammar(get_gesd_model()["model"], get_gesd_model()["tokenizer"], text, 4)
+        temp.append(text)
+        for t in temp:
+            if t in possible_text.keys():
+                possible_text[t] +=1
+            else:
+                possible_text[t] = 1
+
+    return max(possible_text, key=possible_text.get)
 @app.post("/qaGenerator")
 async def qaGenerator(request: Request):
     body_str = await request.body()

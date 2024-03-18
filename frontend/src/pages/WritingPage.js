@@ -18,8 +18,8 @@ const WritingPage = () => {
         setIsSubmitted(true);
         try {
             const response = await axios.post('http://127.0.0.1:8000/grammarCorrection', { text });
-            setCorrectedText(response.data.corrected_text[0]);
-            setViewMode("split"); // Change to split view upon submission
+            setCorrectedText(response.data.corrected_text);
+            setViewMode("split");
         } catch (error) {
             console.error("Error:", error);
         }
