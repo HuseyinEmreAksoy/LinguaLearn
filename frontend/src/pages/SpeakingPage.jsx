@@ -9,16 +9,19 @@ import DraggableButton from "../components/DraggableButton";
 
 function SpeechToText() {
   const { transcript, listening, resetTranscript } = useSpeechRecognition();
-  const [savedTranscripts, setSavedTranscripts] = useState([
-    "deneme",
-    "deneme2",
-  ]);
+  const [savedTranscripts, setSavedTranscripts] = useState([]);
   const [tiklandi, setTiklandi] = useState(false);
 
   useEffect(() => {
     if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
       console.log("Browser does not support speech recognition.");
     }
+    const synth = window.speechSynthesis;
+    synth.cancel(); //After refreshing page, speech synthesis does not stop. This is why this line of code is here.
+
+    return () => (
+      synth.cancel()
+    );
   }, []);
 
   const handleStart = () => {
@@ -31,6 +34,13 @@ function SpeechToText() {
         setSavedTranscripts([...savedTranscripts, transcript]);
     }
     resetTranscript();
+  };
+
+  const playText = (text) => {
+    const synth = window.speechSynthesis;
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.voice = synth.getVoices()[0];
+		synth.speak(utterance);
   };
 
   return (
@@ -48,7 +58,7 @@ function SpeechToText() {
             className="text-center text-3xl font-bold mb-4"
             style={{ color: "#756AB6" }}
           >
-            Speech to Text English
+            Konuşma Pratiği
           </h1>
           <Box
             className="w-full p-2 border border-gray-300 rounded mb-4"
@@ -76,7 +86,7 @@ function SpeechToText() {
                     justifyContent: "center",
                     alignItems: "center",
                   }}
-                  onClick={() => setTiklandi(true)}
+                  onClick={() => {playText(text);}}
                 >
                   <VolumeUp />
                 </Button>
@@ -92,24 +102,24 @@ function SpeechToText() {
                 onClick={handleStop}
                 startIcon={<Stop />}
               >
-                Stop
+                Durdur
               </Button>
             ) : (
               <Button
                 variant="contained"
-                style={{ backgroundColor: "#AC87C5", color: "#FFF" }}
+                style={{ backgroundColor: "#756AB6", color: "#FFF" }}
                 onClick={handleStart}
                 startIcon={<PlayArrow />}
               >
-                Play
+                Konuş
               </Button>
             )}
             <Button
               variant="contained"
               style={{ backgroundColor: "#756AB6", color: "#FFF" }}
-              onClick={() => resetTranscript() && setSavedTranscripts([])}
+              onClick={() => {setSavedTranscripts([]);}}
             >
-              Reset
+              Sıfırla
             </Button>
           </div>
         </Box>

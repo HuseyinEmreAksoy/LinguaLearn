@@ -3,7 +3,7 @@ import GrammarPage from './pages/GrammarPage'
 import { Route, Routes } from 'react-router-dom';
 import SignUpPage from './pages/SignUpPage';
 import NoPage from './pages/NoPage';
-import SpeechToText from './pages/SpeechToText';
+import SpeechToText from './pages/SpeakingPage';
 import * as routes from './constants/routePaths';
 import VocabularyPage from './pages/VocabularyPage';
 import ReadingPage from './pages/ReadingPage';
