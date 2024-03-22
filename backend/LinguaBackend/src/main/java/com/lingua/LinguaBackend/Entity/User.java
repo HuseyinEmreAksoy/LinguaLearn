@@ -24,9 +24,9 @@ public class User {
     private String userMainLanguage;
 
     @Column(name = "user_level", length = 255)
-    private int userLvl;
+    private String userLvl;
 
-    public User(int userId, String userName, String userEmail, String userPassword, String userMainLanguage,int userLvl) {
+    public User(int userId, String userName, String userEmail, String userPassword, String userMainLanguage,String userLvl) {
         this.userId = userId;
         this.userName = userName;
         this.userEmail = userEmail;
@@ -79,11 +79,11 @@ public class User {
         this.userMainLanguage = userMainLanguage;
     }
 
-    public int getUserLvl() {
+    public String getUserLvl() {
         return userLvl;
     }
 
-    public void setUserLvl(int userLvl) {
+    public void setUserLvl(String userLvl) {
         this.userLvl = userLvl;
     }
 

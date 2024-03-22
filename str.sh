@@ -1,2 +1,2 @@
-$ source myenv/Scripts/activate
+source myenv/Scripts/activate
 uvicorn grammerController:app --reload

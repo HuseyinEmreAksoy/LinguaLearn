@@ -10,9 +10,9 @@ public class UserDto {
     private String userEmail;
     private String userPassword;
     private String userMainLanguage;
-    private int userLvl;
+    private String userLvl;
 
-    public UserDto(int userId, String userName, String userEmail, String userPassword, String userMainLanguage, int userLvl) {
+    public UserDto(int userId, String userName, String userEmail, String userPassword, String userMainLanguage, String userLvl) {
         this.userId = userId;
         this.userName = userName;
         this.userEmail = userEmail;
@@ -24,11 +24,11 @@ public class UserDto {
     public UserDto() {
     }
 
-    public int getUserLvl() {
+    public String getUserLvl() {
         return userLvl;
     }
 
-    public void setUserLvl(int userLvl) {
+    public void setUserLvl(String userLvl) {
         this.userLvl = userLvl;
     }
 
