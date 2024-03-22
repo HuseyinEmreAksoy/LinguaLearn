@@ -1,4 +1,4 @@
-import { TextField, InputLabel, Select, MenuItem, Box, FormControl, Button } from "@mui/material";
+import { TextField, InputLabel, Select, MenuItem, Box, FormControl, Button, Alert } from "@mui/material";
 import { useState } from "react";
 import axios from 'axios';
 
@@ -10,7 +10,9 @@ function SignUpPage() {
     const [password, setPassword] = useState("");
     const [passwordAgain, setPasswordAgain] = useState("");
     const [email, setEmail] = useState("");
-    const [language, setLanguage] = useState("Language");
+    const [language, setLanguage] = useState("");
+    const [level, setLevel] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
 
     const style = {
         display: 'flex',
@@ -21,27 +23,60 @@ function SignUpPage() {
         paddingRight: '2%'
     };
 
-    async function save(event){
-        event.preventDefault();
-        try 
-        {   
-            await axios.post("http://localhost:8080/api/v1/user/save",
-            {userName : name+ " " + surname,
-            userEmail : email,
-            userPassword : password,
-            userMainLanguage : language
-        });
-            alert("User Register is Successful!!");
-            setEmail("");
-            setSurname("");
-            setName("");
-            setPassword("");
-            setPasswordAgain("");
-            setLanguage("Language");
-            
+    const isSaveable = () => {
+        let toReturn = false;
+
+        if(isEverythingFilled()) {
+            if(password == passwordAgain) {
+                toReturn = true;
+            }
+            else {
+                setErrorMessage("Parolalar Eşleşmiyor!");
+            }
         }
-        catch(err){
-            alert("User Register is Failed!")
+        else {
+            setErrorMessage("Lütfen tüm alanları doldurun!");
+        }
+
+        return toReturn;
+    }
+
+    const isEverythingFilled = () => {
+        return(
+            name != "" &&
+            surname != "" &&
+            password != "" &&
+            passwordAgain != "" &&
+            email != "" &&
+            language != "" &&
+            level != "");
+    };
+
+    async function save(event){
+        setErrorMessage("");
+        if(isSaveable()) {
+            event.preventDefault();
+            try 
+            {   
+                await axios.post("http://localhost:8080/api/v1/user/save",
+                {userName : name+ " " + surname,
+                userEmail : email,
+                userPassword : password,
+                userMainLanguage : language,
+                userLvl: level
+            });
+                alert("User Register is Successful!!");
+                setEmail("");
+                setSurname("");
+                setName("");
+                setPassword("");
+                setPasswordAgain("");
+                setLanguage("");
+                setLevel("");
+            }
+            catch(err){
+                alert("User Register is Failed!")
+            }
         }
     }
 
@@ -53,6 +88,14 @@ function SignUpPage() {
             <div style={style}>
                 <h1 class="text-3xl">Kaydolun ve Öğrenmeye Başlayın!</h1>
             </div>
+            {
+                errorMessage != "" ?
+                    <div class="mb-2">
+                        <Alert severity="error">{errorMessage}</Alert>
+                    </div>
+                :
+                    <></>
+            }
             <div class="h-56 grid grid-cols-3 gap-4 content-start">
                 <div>
                     <TextField value={name} onChange={(event) => {setName(event.target.value)}} required label="İsim"></TextField>
@@ -70,19 +113,37 @@ function SignUpPage() {
                     <TextField value={passwordAgain} onChange={(event) => {setPasswordAgain(event.target.value)}} required label= "Parolayı Yeniden Girin" type="password"/> 
                 </div>
                 <FormControl>
-                    <InputLabel id="demo-simple-select-label">Ana Dil</InputLabel>
+                    <InputLabel id="demo-simple-select-label">Öğrenilecek Dil</InputLabel>
                     <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     value={language}
                     label="Language"
                     onChange={(event) => {setLanguage(event.target.value)}}
+                    required
                     >
-                        <MenuItem value={"Turkish"}>Türkçe</MenuItem>
                         <MenuItem value={"English"}>İngilizce</MenuItem>
                         <MenuItem value={"German"}>Almanca</MenuItem>
                         <MenuItem value={"French"}>Fransızca</MenuItem>
                         <MenuItem value={"Spanish"}>İspanyolca</MenuItem>
+                    </Select>
+                </FormControl>
+                <FormControl>
+                    <InputLabel id="demo-simple-select-label">Dil Seviyesi</InputLabel>
+                    <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={level}
+                    label="Level"
+                    onChange={(event) => {setLevel(event.target.value)}}
+                    required
+                    >
+                        <MenuItem value={"A1"}>A1</MenuItem>
+                        <MenuItem value={"A2"}>A2</MenuItem>
+                        <MenuItem value={"B1"}>B1</MenuItem>
+                        <MenuItem value={"B2"}>B2</MenuItem>
+                        <MenuItem value={"C1"}>C1</MenuItem>
+                        <MenuItem value={"C2"}>C2</MenuItem>
                     </Select>
                 </FormControl>
             </div>
