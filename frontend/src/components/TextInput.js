@@ -49,7 +49,7 @@ const TextInput = (props) => {
             class="col-start-1 col-span-11" id="outlined-basic" 
             variant="outlined" />
             <div>
-                <Button onClick={handleClick} disabled={message === ""} startIcon={<SendIcon></SendIcon>}>Send</Button>
+                <Button onClick={handleClick} disabled={message === ""} startIcon={<SendIcon></SendIcon>}>Gönder</Button>
             </div>
         </div>
     );

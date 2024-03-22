@@ -30,12 +30,12 @@ const WritingPage = () => {
         <Box className="min-h-screen bg-gray-100 p-5">
             <DraggableButton />
             <Typography variant="h4" textAlign="center" color="deepPurple" gutterBottom>
-                Writing Correction
+                Yazım Düzeltme
             </Typography>
             <Box className={`container mx-auto ${viewMode === "split" ? "grid grid-cols-1 md:grid-cols-2 gap-4" : ""}`}>
                 <TextField
                     id="original-text"
-                    label="Your Text"
+                    label="Metniniz"
                     multiline
                     rows={16}
                     variant="outlined"
@@ -43,13 +43,13 @@ const WritingPage = () => {
                     onChange={handleChange}
                     fullWidth
                     margin="normal"
-                    placeholder="Type or paste your text here..."
+                    placeholder="Metninizi buraya yazınız..."
                     sx={{ backgroundColor: 'white' }}
                 />
                 {viewMode === "split" && correctedText && (
                     <TextField
                         id="corrected-text"
-                        label="Corrected Text"
+                        label="Düzeltilmiş Metin"
                         multiline
                         rows={16}
                         variant="outlined"
@@ -72,7 +72,7 @@ const WritingPage = () => {
                     startIcon={<SendIcon />}
                     sx={{ mt: 2 }}
                 >
-                    {isSubmitted ? "Processing..." : "Submit"}
+                    {isSubmitted ? "İşlenliyor..." : "Gönder"}
                 </Button>
             </Box>
         </Box>

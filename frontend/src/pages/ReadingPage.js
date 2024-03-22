@@ -126,12 +126,12 @@ const ReadingPage = () => {
                                         ))}
                                     </div>
                                     <div class="flex justify-center space-x-4 mt-4">
-                                        <Button variant="contained" style={{ backgroundColor: "#1976d2", color: "white" }} onClick={handleSubmit} disabled={!isSubmittable} startIcon={<SendIcon />}>Submit</Button>
-                                        <Button variant="outlined" style={{ borderColor: "#ff9800", color: "#ff9800" }} onClick={handleNew} startIcon={<ReplayIcon />}>New</Button>
+                                        <Button variant="contained" style={{ backgroundColor: "#1976d2", color: "white" }} onClick={handleSubmit} disabled={!isSubmittable} startIcon={<SendIcon />}>Gönder</Button>
+                                        <Button variant="outlined" style={{ borderColor: "#ff9800", color: "#ff9800" }} onClick={handleNew} startIcon={<ReplayIcon />}>Yenile</Button>
                                     </div>
                                     {isSubmitted && (
                                         <div class="text-center mt-4">
-                                            <p>{numberOfCorrectAnswer} correct answers!</p>
+                                            <p>{numberOfCorrectAnswer} doğru cevabınız var!</p>
                                         </div>
                                     )}
                                 </>
@@ -147,7 +147,7 @@ const ReadingPage = () => {
                                         onClick={() => setIsQuestionsVisible(true)}
                                         disabled={questions.length === 0}
                                     >
-                                        Show Questions
+                                        Soruları Göster
                                     </Button>
                                 </div>
                             )}

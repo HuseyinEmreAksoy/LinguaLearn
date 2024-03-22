@@ -118,8 +118,8 @@ const ListeningPage = () => {
                                     ))}
                                 </div>
                                 <div class="flex justify-center space-x-4 mt-4">
-                                    <Button variant="contained" color="primary" onClick={handleSubmit} disabled={!isSubmittable} startIcon={<SendIcon />}>Submit</Button>
-                                    <Button variant="outlined" style={{ borderColor: "#ff9800", color: "#ff9800" }} onClick={handleNew} startIcon={<ReplayIcon />}>New</Button>
+                                    <Button variant="contained" color="primary" onClick={handleSubmit} disabled={!isSubmittable} startIcon={<SendIcon />}>Gönder</Button>
+                                    <Button variant="outlined" style={{ borderColor: "#ff9800", color: "#ff9800" }} onClick={handleNew} startIcon={<ReplayIcon />}>Yenile</Button>
                                 </div>
                                 {isSubmitted && (
                                     <div class="text-center mt-4">
@@ -138,7 +138,7 @@ const ListeningPage = () => {
                                     onClick={() => setIsQuestionsVisible(true)}
                                     disabled={questions.length === 0}
                                 >
-                                    Show Questions
+                                    Soruları Göster
                                 </Button>
                             </div>
                         )}
