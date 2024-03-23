@@ -9,6 +9,7 @@ import DraggableButton from "../components/DraggableButton";
 import LoadingPage from "../components/LoadingPage";
 import TextToSpeech from "../components/TextToSpeech";
 import axios from "axios";
+import { useLocation } from "react-router-dom";
 
 const ListeningPage = () => {
 
@@ -20,6 +21,9 @@ const ListeningPage = () => {
     const [numberOfCorrectAnswer, setNumberOfCorrectAnswer] = useState(0);
     const [isQuestionsVisible, setIsQuestionsVisible] = useState(false);
     let newAnswers = [];
+
+    const location = useLocation();
+    let user = location.state.user;
 
     useEffect(() => {
         handleNew();
@@ -85,7 +89,7 @@ const ListeningPage = () => {
         setIsSubmitted(false);
         newAnswers = [];
 
-        const response = await axios.get("http://localhost:8080/api/v1/text/findByLevel?textLevel=B2&textLanguage=English");
+        const response = await axios.get("http://localhost:8080/api/v1/text/findByLevel?textLevel=" + user.userLvl + "&textLanguage=English");
         let newTextObject = response.data[Math.floor(Math.random() * response.data.length)];
         setText(newTextObject.textText);
 
@@ -101,7 +105,7 @@ const ListeningPage = () => {
 
     return (
         <FullPage class="overflow-y-auto overflow-x-hidden bg-blue-50">
-            <DraggableButton />
+            <DraggableButton user={user}/>
             {text === "" ? (
                 <LoadingPage />
             ) : (

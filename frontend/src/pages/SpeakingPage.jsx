@@ -6,11 +6,14 @@ import { Button, Box, Container } from "@mui/material";
 import { PlayArrow, Stop, VolumeUp } from "@mui/icons-material";
 import "tailwindcss/tailwind.css";
 import DraggableButton from "../components/DraggableButton";
+import { useLocation } from "react-router-dom";
 
 function SpeechToText() {
   const { transcript, listening, resetTranscript } = useSpeechRecognition();
   const [savedTranscripts, setSavedTranscripts] = useState([]);
-  const [tiklandi, setTiklandi] = useState(false);
+
+  const location = useLocation();
+  let user = location.state.user;
 
   useEffect(() => {
     if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
@@ -48,7 +51,7 @@ function SpeechToText() {
       className="flex justify-center items-center h-screen"
       style={{ backgroundColor: "#FFE5E5" }}
     >
-      <DraggableButton></DraggableButton>
+      <DraggableButton user={user}></DraggableButton>
       <Container>
         <Box
           className="w-full md:w-2/3 lg:w-2/3 mx-auto bg-white p-4 rounded shadow-lg"

@@ -1,10 +1,12 @@
 import { TextField, InputLabel, Select, MenuItem, Box, FormControl, Button, Alert } from "@mui/material";
 import { useState } from "react";
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
+import * as routes from '../constants/routePaths';
 
 
 
-function SignUpPage() {
+const SignUpPage = () => {
     const [name, setName] = useState("");
     const [surname, setSurname] = useState("");
     const [password, setPassword] = useState("");
@@ -13,6 +15,8 @@ function SignUpPage() {
     const [language, setLanguage] = useState("");
     const [level, setLevel] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
+
+    const navigate = useNavigate();
 
     const style = {
         display: 'flex',
@@ -54,18 +58,18 @@ function SignUpPage() {
 
     async function save(event){
         setErrorMessage("");
+        let user = {userName : name+ " " + surname,
+                    userEmail : email,
+                    userPassword : password,
+                    userMainLanguage : language,
+                    userLvl: level};
+
         if(isSaveable()) {
             event.preventDefault();
             try 
             {   
-                await axios.post("http://localhost:8080/api/v1/user/save",
-                {userName : name+ " " + surname,
-                userEmail : email,
-                userPassword : password,
-                userMainLanguage : language,
-                userLvl: level
-            });
-                alert("User Register is Successful!!");
+                await axios.post("http://localhost:8080/api/v1/user/save", user);
+                navigate(routes.USER_PAGE_PATH, {state: {user: user}});
                 setEmail("");
                 setSurname("");
                 setName("");

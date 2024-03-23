@@ -5,9 +5,13 @@ import FullPage from "../components/Helper/FullPage";
 import TextInput from "../components/TextInput";
 import DraggableButton from "../components/DraggableButton";
 import axios from 'axios';
+import { useLocation } from "react-router-dom";
 
 function GrammarPage() {
     const [chatHistory, setChatHistory] = useState([]);
+
+    const location = useLocation();
+    let user = location.state.user;
 
     const addMessageToChatHistory = (text, type) => {
         setChatHistory(chatHistory => [...chatHistory, { type, content: text }]);
@@ -31,7 +35,7 @@ function GrammarPage() {
 
     return (
         <FullPage class="bg-pomp_and_power-800">
-            <DraggableButton></DraggableButton>
+            <DraggableButton user={user}></DraggableButton>
             <div class="h-5/6 float-bottom">
                 <ChatBox class="w-7/12 h-4/6 mx-auto" chatHistory={chatHistory} />
                 <TextInput send={sendMessage} class="w-7/12 mx-auto mt-3" />

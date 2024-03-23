@@ -5,9 +5,9 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { List, ListItem, ListItemButton } from "@mui/material";
 import Wrapper from "./Helper/Wrapper";
 import * as routes from "../constants/routePaths";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
-function DraggableButton({screenSize}) {
+function DraggableButton(props) {
     const buttonRef = useRef();
     const defaultPosition = {x:0, y:0};
     const [position, setPosition] = useState(defaultPosition);
@@ -15,6 +15,7 @@ function DraggableButton({screenSize}) {
     const [listPosition, setListPosition] = useState(defaultPosition);
 
     const navigate = useNavigate();
+    let user = props.user;
 
     const getPosition = () => {
         let specs = buttonRef.current.getBoundingClientRect();
@@ -72,22 +73,22 @@ function DraggableButton({screenSize}) {
                 isOpen ?
                     <Wrapper>
                         <List class="w-32 z-[100]" style={{position:"absolute", left:listPosition.x, top:listPosition.y}}>
-                            <ListItem class="bg-red-400 rounded-r-full" onClick={() => {navigate(routes.SPEAKING_PAGE_PATH);}}>
+                            <ListItem class="bg-red-400 rounded-r-full" onClick={() => {navigate(routes.SPEAKING_PAGE_PATH, {state:{user: user}});}}>
                                 <ListItemButton><p class="text-white">Konuşma</p></ListItemButton>
                             </ListItem>
-                            <ListItem class="bg-orange-400 rounded-r-full" onClick={() => {navigate(routes.READING_PAGE_PATH);}}>
+                            <ListItem class="bg-orange-400 rounded-r-full" onClick={() => {navigate(routes.READING_PAGE_PATH, {state:{user: user}});}}>
                                 <ListItemButton><p class="text-white">Okuma</p></ListItemButton>
                             </ListItem>
-                            <ListItem class="bg-yellow-400 rounded-r-full" onClick={() => {navigate(routes.WRITING_PAGE_PATH);}}>
+                            <ListItem class="bg-yellow-400 rounded-r-full" onClick={() => {navigate(routes.WRITING_PAGE_PATH, {state:{user: user}});}}>
                                 <ListItemButton><p class="text-white">Yazma</p></ListItemButton>
                             </ListItem>
-                            <ListItem class="bg-lime-400 rounded-r-full" onClick={() => {navigate(routes.VOCABULARY_PAGE_PATH);}}>
+                            <ListItem class="bg-lime-400 rounded-r-full" onClick={() => {navigate(routes.VOCABULARY_PAGE_PATH, {state:{user: user}});}}>
                                 <ListItemButton><p class="text-white">Kelime Bilgisi</p></ListItemButton>
                             </ListItem>
-                            <ListItem class="bg-cyan-400 rounded-r-full" onClick={() => {navigate(routes.GRAMMAR_PAGE_PATH);}}>
+                            <ListItem class="bg-cyan-400 rounded-r-full" onClick={() => {navigate(routes.GRAMMAR_PAGE_PATH, {state:{user: user}});}}>
                                 <ListItemButton><p class="text-white">Dil Bilgisi</p></ListItemButton>
                             </ListItem>
-                            <ListItem class="bg-purple-400 rounded-r-full" onClick={() => {navigate(routes.LISTENING_PAGE_PATH);}}>
+                            <ListItem class="bg-purple-400 rounded-r-full" onClick={() => {navigate(routes.LISTENING_PAGE_PATH, {state:{user: user}});}}>
                                 <ListItemButton><p class="text-white">Dinleme</p></ListItemButton>
                             </ListItem>
                         </List>

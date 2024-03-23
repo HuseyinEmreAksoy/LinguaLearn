@@ -3,12 +3,16 @@ import { Button, TextField, Box, Typography } from "@mui/material";
 import SendIcon from '@mui/icons-material/Send';
 import axios from "axios";
 import DraggableButton from "../components/DraggableButton";
+import { useLocation } from "react-router-dom";
 
 const WritingPage = () => {
     const [text, setText] = useState("");
     const [correctedText, setCorrectedText] = useState("");
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [viewMode, setViewMode] = useState("full"); // "full" for full page, "split" for split view
+
+    const location = useLocation();
+    let user = location.state.user;
 
     const handleChange = (event) => {
         setText(event.target.value);
@@ -28,7 +32,7 @@ const WritingPage = () => {
 
     return (
         <Box className="min-h-screen bg-gray-100 p-5">
-            <DraggableButton />
+            <DraggableButton user={user} />
             <Typography variant="h4" textAlign="center" color="deepPurple" gutterBottom>
                 Yazım Düzeltme
             </Typography>

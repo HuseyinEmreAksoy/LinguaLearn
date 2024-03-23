@@ -7,11 +7,11 @@ import SendIcon from '@mui/icons-material/Send';
 import DraggableButton from "../components/DraggableButton";
 import LoadingPage from "../components/LoadingPage";
 import axios from "axios";
+import { useLocation } from "react-router-dom";
 
 const ReadingPage = () => {
 
     const [text, setText] = useState("");
-    const [textLevel, setTextLevel] = useState("B2");
     const [questions, setQuestions] = useState([]);
     const [answers, setAnswers] = useState([]);
     const [isSubmitted, setIsSubmitted] = useState(false);
@@ -19,6 +19,9 @@ const ReadingPage = () => {
     const [numberOfCorrectAnswer, setNumberOfCorrectAnswer] = useState(0);
     const [isQuestionsVisible, setIsQuestionsVisible] = useState(false);
     let newAnswers = [];
+
+    const location = useLocation();
+    let user = location.state.user;
 
     useEffect(() => {
         handleNew();
@@ -84,7 +87,7 @@ const ReadingPage = () => {
         setIsSubmitted(false);
         newAnswers = [];
 
-        const response = await axios.get(`http://localhost:8080/api/v1/text/findByLevel?textLevel=${textLevel}&textLanguage=English`);
+        const response = await axios.get("http://localhost:8080/api/v1/text/findByLevel?textLevel=" + user.userLvl + "&textLanguage=English");
         const dataArray = response.data;
 
         let randomElement;
@@ -106,7 +109,7 @@ const ReadingPage = () => {
 
     return (
         <FullPage class="overflow-y-auto overflow-x-hidden bg-blue-50">
-            <DraggableButton />
+            <DraggableButton user={user}/>
             {
                 (text === "") ?
                     <LoadingPage />
