@@ -91,6 +91,9 @@ function DraggableButton(props) {
                             <ListItem class="bg-purple-400 rounded-r-full" onClick={() => {navigate(routes.LISTENING_PAGE_PATH, {state:{user: user}});}}>
                                 <ListItemButton><p class="text-white">Dinleme</p></ListItemButton>
                             </ListItem>
+                            <ListItem class="bg-violet-400 rounded-r-full" onClick={() => {navigate(routes.USER_PAGE_PATH, {state:{user: user}});}}>
+                                <ListItemButton><p class="text-white">Profilim</p></ListItemButton>
+                            </ListItem>
                         </List>
                     </Wrapper>
                 :

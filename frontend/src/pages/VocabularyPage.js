@@ -48,6 +48,16 @@ const VocabularyPage = (props) => {
                 numberOfCorrectAnswer++;
             }
         }
+
+        const date = new Date();
+        let performance = {
+            activityType: "Vocabulary",
+            correntAnswer: numberOfCorrectAnswer,
+            date: date,
+            wrongAnswers: (numberOfWord - numberOfCorrectAnswer),
+            userId: user.userId
+        };
+        axios.post("http://localhost:8080/api/v1/performance/savePerformance", performance);
         setCorrectAnswer(numberOfCorrectAnswer);
     };
 
