@@ -10,8 +10,8 @@ const UserPage = () => {
     console.log(user);
     
     const loadWord = async () => {
-        const response = await axios.get("http://localhost:8080/api/v1/performance/" + user.userId + "/Vocabulary");
-        console.log(response);
+        const response = await axios.get("http://localhost:8080/api/v1/performance/" + user.userId + "/listening");
+        console.log(response.data);
     }
 
     return(

@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/performance")
+@CrossOrigin
+@RequestMapping("/api/v1/performance")
 public class PerformanceController {
 
     @Autowired
