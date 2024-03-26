@@ -85,7 +85,6 @@ class MCQGenerator():
 
             distractors = remove_duplicates(distractors)
             distractors = remove_distractors_duplicate_with_correct_answer(question.answerText, distractors)
-            #TODO - filter distractors having a similar bleu score with another distractor
 
             question.distractors = distractors
 
@@ -101,7 +100,6 @@ class MCQGenerator():
 
         return answers
 
-    #TODO: refactor to create better splits closer to the desired amount
     def _split_context_according_to_desired_count(self, context: str, desired_count: int) -> List[str]:
         sents = sent_tokenize(context)
         sent_ratio = len(sents) / desired_count

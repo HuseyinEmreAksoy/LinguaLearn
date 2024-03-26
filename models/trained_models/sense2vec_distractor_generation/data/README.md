@@ -1,0 +1,1 @@
+Please consider downloading the `Reddit comments 2015` data from [data-file](https://github.com/explosion/sense2vec/releases/download/v1.0.0/s2v_reddit_2015_md.tar.gz) and place `s2v_old` folder in this directory.

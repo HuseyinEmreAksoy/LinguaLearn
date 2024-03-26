@@ -23,5 +23,5 @@ LEVELED_TEXTS = None
 def get_leveled_texts():
     global LEVELED_TEXTS
     if LEVELED_TEXTS is None:
-        LEVELED_TEXTS = pd.read_csv("..\datasets\cefr_leveled_texts.csv")
+        LEVELED_TEXTS = pd.read_csv("..\scraped_datasets\cefr_leveled_texts.csv")
     return LEVELED_TEXTS

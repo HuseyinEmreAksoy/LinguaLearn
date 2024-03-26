@@ -1,0 +1,2 @@
+Please consider downloading the Stanford Question Answering dataset from [SQuAD2.0](https://rajpurkar.github.io/SQuAD-explorer/) checkpoint and place it inside this directory. 
+The data is provided by us in the repository since it is not considered a large file by GitHub.
