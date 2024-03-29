@@ -26,7 +26,12 @@ const ListeningPage = () => {
     let user = location.state.user;
 
     useEffect(() => {
+        const synth = window.speechSynthesis;
+        synth.cancel(); //After refreshing page, speech synthesis does not stop. This is why this line of code is here.
         handleNew();
+        return () => (
+            synth.cancel()
+        );
     }, []);
 
     const checkSubmittableState = () => {
