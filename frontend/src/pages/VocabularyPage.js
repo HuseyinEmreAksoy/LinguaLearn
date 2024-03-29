@@ -52,7 +52,7 @@ const VocabularyPage = (props) => {
         const date = new Date();
         let performance = {
             activityType: "Vocabulary",
-            correntAnswer: numberOfCorrectAnswer,
+            correctAnswers: (numberOfCorrectAnswer),
             date: date,
             wrongAnswers: (numberOfWord - numberOfCorrectAnswer),
             userId: user.userId
