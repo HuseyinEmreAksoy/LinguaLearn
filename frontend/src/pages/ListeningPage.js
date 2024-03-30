@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import FullPage from "../components/Helper/FullPage";
 import { createQuestion } from "../components/Question";
 import { Button } from "@mui/material";
-import Wrapper from "../components/Helper/Wrapper";
 import ReplayIcon from '@mui/icons-material/Replay';
 import SendIcon from '@mui/icons-material/Send';
 import DraggableButton from "../components/DraggableButton";
@@ -80,6 +79,17 @@ const ListeningPage = () => {
                 newQuestions.push(turnQuestionRed(i));
             }
         }
+
+        const date = new Date();
+        let performance = {
+            activityType: "Listening",
+            correctAnswers: (newNumberOfCorrectAnswer),
+            date: date,
+            wrongAnswers: (questions.length - newNumberOfCorrectAnswer),
+            userId: user.userId
+        };
+        axios.post("http://localhost:8080/api/v1/performance/savePerformance", performance);
+
         setQuestions(newQuestions);
         setNumberOfCorrectAnswer(newNumberOfCorrectAnswer);
         setIsSubmitted(true);

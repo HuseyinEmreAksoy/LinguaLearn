@@ -73,6 +73,17 @@ const ReadingPage = () => {
                 newQuestions.push(turnQuestionRed(i));
             }
         }
+
+        const date = new Date();
+        let performance = {
+            activityType: "Reading",
+            correctAnswers: (newNumberOfCorrectAnswer),
+            date: date,
+            wrongAnswers: (questions.length - newNumberOfCorrectAnswer),
+            userId: user.userId
+        };
+        axios.post("http://localhost:8080/api/v1/performance/savePerformance", performance);
+
         setQuestions(newQuestions);
         setNumberOfCorrectAnswer(newNumberOfCorrectAnswer);
         setIsSubmitted(true);
