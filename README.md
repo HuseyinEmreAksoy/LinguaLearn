@@ -1,2 +1,4 @@
 # LinguaLearn
 2023-2024 Spring Computer Science Final Project TOBB University of Economics and Technologies
+## Introduction
+We believe that learning a new language opens doors to understanding different cultures, perspectives, and a world of opportunities.That's why we've created an online platform powered by the latest in transformer models. Our comprehensive approach encompasses reading, writing, listening, speaking all designed for our users. Whether you're a beginner aiming to lay a solid foundation or an advanced learner seeking to refine your skills, LinguaLearn offers a rich, interactive experience that makes language learning engaging, effective, and fun.
