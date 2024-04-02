@@ -61,11 +61,10 @@ Fine-tuned multilingual T5 Transformer model for correcting grammar and spelling
 	<code><img width="50" src="https://user-images.githubusercontent.com/25181517/183911547-990692bc-8411-4878-99a0-43506cdb69cf.png" alt="GCP" title="GCP"/></code>
 	<code><img width="50" src="https://user-images.githubusercontent.com/25181517/223639822-2a01e63a-a7f9-4a39-8930-61431541bc06.png" alt="TensorFlow" title="TensorFlow"/></code>
 	<code><img width="50" src="https://user-images.githubusercontent.com/25181517/186884150-05e9ff6d-340e-4802-9533-2c3f02363ee3.png" alt="Windows" title="Windows"/></code>
-  <code><img width="50" src="https://raw.githubusercontent.com/onemarc/tech-icons/8ba629e8d2956306e6e8a95d5cb5a7502a99087d/icons/pytorch-light.svg" alt="Torch" title="Torch"/></code>
-  <code><img width="50" src="https://github.com/tandpfun/skill-icons/blob/main/icons/ScikitLearn-Dark.svg" alt="Scikit" title="scikit-learn"/></code>
+  	<code><img width="50" src="https://raw.githubusercontent.com/onemarc/tech-icons/8ba629e8d2956306e6e8a95d5cb5a7502a99087d/icons/pytorch-light.svg" alt="Torch" title="Torch"/></code>
+  	<code><img width="50" src="https://github.com/tandpfun/skill-icons/blob/main/icons/ScikitLearn-Dark.svg" alt="Scikit" title="scikit-learn"/></code>
 	<code><img width="50" src="https://user-images.githubusercontent.com/25181517/183914128-3fc88b4a-4ac1-40e6-9443-9a30182379b7.png" alt="Jupyter Notebook" title="Jupyter Notebook"/></code>
-  <code><img width="50" src="https://github.com/tandpfun/skill-icons/blob/main/icons/Anaconda-Dark.svg" alt="Conda" title="Conda"/></code>
-  <code><img width="50" src="https://github.com/tandpfun/skill-icons/blob/main/icons/Npm-Dark.svg" alt="NPM" title="NPM"/</code>
-  <code><img width="50" src="https://github.com/tandpfun/skill-icons/blob/main/icons/PyCharm-Dark.svg" alt="PyCharm" title="PyCharm"/</code>
+  	<code><img width="50" src="https://github.com/tandpfun/skill-icons/blob/main/icons/Anaconda-Dark.svg" alt="Conda" title="Conda"/></code>
+	<code><img width="50" src="https://github.com/tandpfun/skill-icons/blob/main/icons/PyCharm-Dark.svg" alt="PyCharm" title="PyCharm"/</code>
 </div>
 
