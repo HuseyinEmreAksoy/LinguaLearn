@@ -48,8 +48,7 @@ function SpeechToText() {
 
   return (
     <div
-      className="flex justify-center items-center h-screen"
-      style={{ backgroundColor: "#FFE5E5" }}
+      className="flex justify-center items-center h-screen bg-red-100"
     >
       <DraggableButton user={user}></DraggableButton>
       <Container>

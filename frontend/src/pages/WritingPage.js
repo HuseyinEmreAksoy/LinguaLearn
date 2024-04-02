@@ -31,7 +31,7 @@ const WritingPage = () => {
     };
 
     return (
-        <Box className="min-h-screen bg-gray-100 p-5">
+        <Box className="min-h-screen bg-yellow-100 p-5">
             <DraggableButton user={user} />
             <Typography variant="h4" textAlign="center" color="deepPurple" gutterBottom>
                 Yazım Düzeltme

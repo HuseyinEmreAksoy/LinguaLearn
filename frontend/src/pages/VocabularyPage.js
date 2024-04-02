@@ -96,12 +96,12 @@ const VocabularyPage = (props) => {
     }
     else {
         cardElements = words.map((element, index) => {return(<FlashCard             
-            class={`bg-gradient-to-r ${index % 2 === 0 ? 'from-orange-300 to-yellow-200' : 'from-pink-300 to-yellow-200'}`} 
+            class={`bg-gradient-to-r ${index % 2 === 0 ? 'from-gray-100 to-gray-100' : 'from-gray-100 to-gray-100'}`} 
             front={element[0]} back={element[1]} id={index} update={updateAnswer} isFlippable={isSubmitted}></FlashCard>);});
     }
 
     return(
-        <div class="flex justify-center items-center min-h-screen" style={{width: screenSize.width, height: screenSize.height, background: 'linear-gradient(to right, #dae2f8, #d6a4a4)'}}>
+        <div class="flex justify-center items-center min-h-screen bg-lime-100" style={{width: screenSize.width, height: screenSize.height}}>
 
             <div class="w-9/12 bg-red grid grid-cols-3 gap-8 mt-4" style={{
                 position: 'absolute', left: '50%', top: '50%',

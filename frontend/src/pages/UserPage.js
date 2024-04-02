@@ -64,24 +64,32 @@ const UserPage = () => {
         setValue(newValue);
       };
 
-    return(
-        <FullPage>
-            <DraggableButton user={user}></DraggableButton>
-            <div>
-                <div>
-                    <h1>Merhaba {user.userName}!</h1>
-                </div>
-                <div>
-                    <Tabs value={value} onChange={handleChange}>
-                        <Tab label="Okuma" />
-                        <Tab label="Kelime Bilgisi" />
-                        <Tab label="Dinleme" />
-                    </Tabs>
-                </div>
-                {PerformanceGraph(user, valueToPerformance[value])}
-            </div>
-        </FullPage>
-    );
+    // UserPage component
+return (
+    <FullPage class="flex flex-col items-center justify-center bg-blue-50">
+
+        <div class="text-3xl font-bold mb-4">
+            <h1 class="text-2xl font-bold">Merhaba {user.userName}!</h1>
+        </div>
+        <DraggableButton user={user} />
+
+        <div class="my-8">
+            <Tabs
+                value={value}
+                onChange={handleChange}
+                textColor="primary"
+                indicatorColor="primary"
+                class="mb-4"
+            >
+                <Tab label="Okuma" />
+                <Tab label="Kelime Bilgisi" />
+                <Tab label="Dinleme" />
+            </Tabs>
+            {PerformanceGraph(user, valueToPerformance[value])}
+        </div>
+    </FullPage>
+);
+
 }
 
 export default UserPage;

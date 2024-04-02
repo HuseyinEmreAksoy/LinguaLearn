@@ -119,7 +119,7 @@ const ReadingPage = () => {
     };
 
     return (
-        <FullPage class="overflow-y-auto overflow-x-hidden bg-blue-50">
+        <FullPage class="overflow-y-auto overflow-x-hidden bg-orange-100">
             <DraggableButton user={user}/>
             {
                 (text === "") ?
