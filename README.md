@@ -5,17 +5,25 @@ We believe that learning a new language opens doors to understanding different c
 ## Content
 #### Reading
 Our fine-tuned transformer models will generate multiple choice questions for the user from level based text from our database. The user will pick one of the answers for each question that is according to the text.
+![Screenshot from development.](/images/reading_ui.jpg)
 #### Speaking
 Using Google API, the user can give permission for the microphone to the browser and our speaking section page will listen. It will automatically transform the speech to the text and help you with the accent of the language.
+![Screenshot from development.](/images/speaking_ui.jpg)
 #### Listening
 Once again with the help of Google API, the user can write a text and listen the given text by a variety of different accents specific to that language.
+![Screenshot from development.](/images/listening_ui.jpg)
 #### Writing
-Our other fine-tuned transformer model, takes the user input and outputs the corrected version. The given text can either have grammar or spelling errors. 
+Our other fine-tuned transformer model, takes the user input and outputs the corrected version. The given text can either have grammar or spelling errors.
+![Screenshot from development.](/images/writing_ui.jpg)
 #### Flash Card
 In this part, we have a fun interface with the most used words in that language. You will click onto a flash card and it will reveal correct if it is correctly translated by the user.
+![Screenshot from development.](/images/flash_card_ui.jpg)
+#### Chat Box
+With the help of ChatGPT, we have integrated and fine-tuned GPT to our purpose and it will be ready to chat for your desire. You can learn other prospects and sides of the language you want to learn.
+![Screenshot from development.](/images/chat_box_ui.jpg)
 ## Datasets
 Scraped and generated data is provided under `scraped_datasets` directory.
-Other public datasets are given below \
+Other public datasets are as given below
 | Vectors              |   Size | Description                  | 📥 Download |
 | -------------------- | -----: | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `s2v_reddit_2015_md` | 573 MB | Reddit comments 2015         | [link](https://github.com/explosion/sense2vec/releases/download/v1.0.0/s2v_reddit_2015_md.tar.gz) |
