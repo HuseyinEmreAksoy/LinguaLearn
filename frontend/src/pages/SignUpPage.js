@@ -55,6 +55,15 @@ const SignUpPage = () => {
             language != "" &&
             level != "");
     };
+    
+    const getUserByEmail = async (email) => {
+        try {
+          const response = await axios.get(`http://localhost:8080/api/v1/user/findByEmail?userEmail=${email}`);
+          return response.data;
+        } catch (error) {
+            return null;
+        }
+    };
 
     async function save(event){
         setErrorMessage("");
@@ -65,22 +74,9 @@ const SignUpPage = () => {
                     userLvl: level};
 
         if(isSaveable()) {
-            event.preventDefault();
-            try 
-            {   
-                await axios.post("http://localhost:8080/api/v1/user/save", user);
-                navigate(routes.USER_PAGE_PATH, {state: {user: user}});
-                setEmail("");
-                setSurname("");
-                setName("");
-                setPassword("");
-                setPasswordAgain("");
-                setLanguage("");
-                setLevel("");
-            }
-            catch(err){
-                alert("User Register is Failed!")
-            }
+            await axios.post("http://localhost:8080/api/v1/user/save", user);
+            user = await getUserByEmail(email);
+            navigate(routes.USER_PAGE_PATH, {state: {user: user}});
         }
     }
 
